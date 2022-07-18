@@ -21,8 +21,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('test/',test),
-    path('register/',register),
-    path('verify/<str:username>/<dates>/',verify)
+
+    path('register/',registerUser),
+    path('registervet/', registervet),
+    path('verify/<str:username>/<dates>/',verifyUser),
+    path('verifyVet/<str:username>/<dates>/',verifyVet),
+
+
 
 ] + static(settings.MEDIA_URL ,document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   {%load static%}
+
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{%block title%}
+      index
+    {%endblock%}
+  </title>
+
+        <link rel="stylesheet"   href="{%static 'css/all.min.css'%}" />
+        <link rel="stylesheet"   href="{%static 'css/normalize.css'%}" />
+
+
+
+  <!-- Font Awesome -->
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Google Fonts -->
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet" />
+    {%block link%}
+          <link rel="stylesheet"    href="{%static 'css/Style.css' %}" />
+
+    {%endblock%}
+</head>
+
+<body>
+  <!-- Start Header -->
+  <div class="header" id="header">
+    <div class="container">
+      <a href="#" class="logo">ACC</a>
+      <ul class="main-nav">
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#features">Features</a></li>
+        <li>
+          <a href="#">Other Links</a>
+          <!-- Start Megamenu -->
+          <div class="mega-menu">
+            <div class="image">
+              <img src="imgs/megamenu.png" alt="" />
+            </div>
+            <ul class="links">
+              <li>
+                <a href="#testimonials"><i class="far fa-comments fa-fw"></i> Meet Our Doctors</a>
+              </li>
+              <li>
+                <a href="#team"><i class="far fa-user fa-fw"></i> Team Work Members</a>
+              </li>
+              <li>
+                <a href="#services"><i class="far fa-building fa-fw"></i> Services</a>
+              </li>
+              <li>
+                <a href="#our-skills"><i class="far fa-check-circle fa-fw"></i> Our Skills</a>
+              </li>
+              <li>
+                <a href="#work-steps"><i class="far fa-clipboard fa-fw"></i> How It Works</a>
+              </li>
+            </ul>
+            <ul class="links">
+              <li>
+                <a href="#events"><i class="far fa-calendar-alt fa-fw"></i> Events</a>
+              </li>
+              <li>
+                <a href="#stats"><i class="far fa-chart-bar fa-fw"></i> Stats</a>
+              </li>
+              <li>
+                <a href="#discount"><i class="fas fa-percent fa-fw"></i> Request A Discount</a>
+              </li>
+            </ul>
+          </div>
+          <!-- End Megamenu -->
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- End Header -->
+  {% block content %}
+  {%endblock%}
+
+
+
+
+
+  <!-- Start Footer -->
+  <div class="footer">
+    <div class="container">
+      <div class="box">
+        <h3>ACC</h3>
+        <ul class="social">
+          <li>
+            <a href="#" class="facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="youtube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </li>
+        </ul>
+        <p class="text">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus nulla rem, dignissimos iste aspernatur
+        </p>
+      </div>
+      <div class="box">
+        <ul class="links">
+          <li><a href="#">Important Link 1</a></li>
+          <li><a href="#">Important Link 2</a></li>
+          <li><a href="#">Important Link 3</a></li>
+          <li><a href="#">Important Link 4</a></li>
+          <li><a href="#">Important Link 5</a></li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="line">
+          <i class="fas fa-map-marker-alt fa-fw"></i>
+          <div class="info">Egypt, Giza, Inside The Sphinx, Room Number 220</div>
+        </div>
+        <div class="line">
+          <i class="far fa-clock fa-fw"></i>
+          <div class="info">Business Hours: From 10:00 To 18:00</div>
+        </div>
+        <div class="line">
+          <i class="fas fa-phone-volume fa-fw"></i>
+          <div class="info">
+            <span>+20123456789</span>
+            <span>+20198765432</span>
+          </div>
+        </div>
+      </div>
+      <div class="box footer-gallery">
+        <img src="{%static 'imgs/1.jpg'%}" alt="" />
+        <img src="{%static 'imgs/2.webp'%}" alt="" />
+        <img src="{%static 'imgs/3.jpg'%}" alt="" />
+        <img src="{%static 'imgs/4.jpg'%}" alt="" />
+        <img src="{%static 'imgs/2.webp'%}" alt="" />
+        <img src="{%static 'imgs/1.jpg'%}" alt="" />
+      </div>
+    </div>
+    <p class="copyright">Made With &lt;3 By Team</p>
+  </div>
+  <!-- End Footer -->
+  {%block script%}
+      <script src=" {%static 'js/main.js'%}"></script>
+  {%endblock%}
+</body>
+
+</html>
