@@ -1,0 +1,4 @@
+.env.bat
+.vars.py
+FinalProject2022/vars.py
+FinalProject2022/env.bat
