@@ -1,0 +1,60 @@
+{%extends 'base.html '%}
+
+{%load static%}
+{%block title%}
+    Location Details
+    {%endblock%}
+{%block link%}
+    <link rel="stylesheet" href="{%static 'css/details.css'%}">
+
+{%endblock%}
+
+    {%block content%}
+       <div class="divMain my-5">
+        <h2 class="main-title">Detailed Locations</h2>
+       </div>
+    <div class="location container-fluid">
+        <div class="container row">
+            <div class="col-6">
+                <img src="{{location.picture.url}}" alt="" id="image">
+            </div>
+            <div class="col-6">
+                <form action="" class="form1">
+                    <h5>{{location.name}}</h5>
+                    <div class="box">
+                        <div class="line">
+                          <i class="fas fa-map-marker-alt fa-fw"></i>
+                          <div class="info">{{location.address}}</div>
+                        </div>
+                        <div class="line">
+                          <i class="far fa-clock fa-fw"></i>
+                          <div class="info">Business Hours: From {{location.work_hours_start}} {{location.work_hours_start_period}} To
+                              {{location.work_hours_end}} {{location.work_hours_end_period}}</div>
+                        </div>
+                        <div class="line">
+                          <i class="fas fa-phone-volume fa-fw"></i>
+                          <div class="info">
+                            <span>{{location.mobile}}</span><br>
+
+                          </div>
+                        </div>
+                        <div class="line">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div class="info">{{location.email}}</div>
+                          </div>
+                          <div class="line">
+                            <i class="fa-solid fa-link"></i>
+                            <div class="info">{{location.website_link}}</div>
+                          </div>
+                          <div class="line">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <div class="info">Our Service</div>
+                          </div>
+                      </div>
+                   
+                </form>
+            </div>
+        </div>
+      </div>
+    
+{%endblock%}

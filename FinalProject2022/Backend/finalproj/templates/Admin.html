@@ -1,0 +1,134 @@
+{%extends 'base.html'%}
+{%block title%}
+Admin
+{%endblock%}
+{%block content%}
+{%load static%}
+<link rel="stylesheet" href=" {% static 'Registration.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/b5c82d464c.js" crossorigin="anonymous"></script>
+    <div class="container container1">
+        <div class="bg-light my-3 p-4">
+            <h1 class="d-flex justify-content-center text-danger">Welcome Admin </h1>
+        </div>
+
+        <div class="title">Add Location</div>
+
+        <form action="/addlocation/" method="post" id="myform" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="user-details">
+
+                <div class="input-box">
+                    <span class="details">Name </span>
+                    <input type="text" placeholder="Enter location Name" name="name" >
+                    <span class="text-danger">{{errname}}</span>
+
+                </div>
+
+
+                <div class="input-box">
+                    <span class="details">Address*</span>
+                    <input type="text" placeholder="Enter Address" id="name" name="address">
+                    <p id="nameerr"></p>
+                    <span class="text-danger">{{erraddress}}</span>
+                </div>
+
+
+                <div class="input-box">
+                    <span class="details">Work Starts at</span>
+                    <input type="number" placeholder="Work Starts at" id="user" name="work_start">
+                    <p id="usererr"></p>
+                    <span class="text-danger">{{errworkstart}}</span>
+
+                </div>
+
+                <div class="input-box">
+
+                    <select class="form-select my-4 p-2" aria-label="Default select example" name="start_period">
+                            <option selected>period of start work</option>
+                            <option value="pm">PM</option>
+                            <option value="am">AM</option>
+
+                    </select>
+                </div>
+
+
+
+
+                <div class="input-box">
+                    <span class="details">Work Ends at</span>
+                    <input type="number" placeholder="Work Starts at" id="user2" name="work_end">
+                    <p id="usererr2"></p>
+                    <span class="text-danger">{{errworkend}}</span>
+
+                </div>
+
+                <div class="input-box">
+
+                    <select class="form-select my-4 p-2" aria-label="Default select example" name="end_period">
+                            <option selected>period of end work</option>
+                            <option value="pm">PM</option>
+                            <option value="am">AM</option>
+
+                    </select>
+                </div>
+
+
+                <div class="input-box">
+                    <span class="details">Email *</span>
+                    <input type="text" placeholder="Enter Location Email" id="email" name="email">
+                    <p id="emailerr"></p>
+                    <span class="text-danger">{{erremail}}</span>
+                </div>
+
+
+                <div class="input-box">
+                    <span class="details">Phone Number *</span>
+                    <input type="text" placeholder="Enter egyption PhoneNumber" id="phone" name="mobile">
+                    <p id="phoneerr"></p>
+                    <span class="text-danger">{{errmobile}}</span>
+                </div>
+
+
+
+
+
+
+
+
+
+<!--                <div class="mb-3 input-box">-->
+<!--                    <label for="country" class="form-label label1">Country</label>-->
+<!--                    <input type="text" class="form-control" name="country" id="Country" aria-describedby="emailHelp" placeholder="Country">-->
+<!--                </div>-->
+                <div class="mb-3 input-box">
+                    <label for="faceLink" class="form-label label1">Website Link</label>
+                    <input type="url" class="form-control" id="faceLink" aria-describedby="emailHelp"
+                        placeholder="http//www.carecenter.com" name="website_link">
+                </div>
+            </div>
+                           <div class="my-2 ">
+                    <span class="details">upload a picture</span>
+                    <input type="file" placeholder="upload a picture" id="file" name="picture" >
+                    <p id="fileerr"></p>
+<!--                    accept="image/png, image/jpeg"-->
+                </div>
+
+            <div class="button">
+                <input type="submit" value="Add New Location"     id="submitbtn">
+            </div>
+
+
+            <p id="submiterror"></p>
+        </form>
+    </div>
+
+<!--    <script src="{% static 'admin.js' %}"></script>-->
+
+{%endblock%}

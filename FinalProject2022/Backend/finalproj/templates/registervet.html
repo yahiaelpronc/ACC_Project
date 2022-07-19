@@ -1,4 +1,7 @@
 {%extends 'base.html'%}
+{%block title%}
+Register for Vet
+{%endblock%}
 {%block content%}
 {%load static%}
 <link rel="stylesheet" href="{% static 'registervet.css' %} ">
@@ -50,7 +53,7 @@
                 <!--                        <li><a class="dropdown-item" href="#">ruminant</a></li>-->
                 <!--                        <li><a class="dropdown-item" href="#">fishes and aquatics</a></li>-->
                 <!--                    </ul>-->
-                <select name="specialization" class="form-select my-2 p-3" aria-label="Default select example">
+                <select name="specialization" class="form-select my-4 p-2" aria-label="Default select example">
                     <option selected>Specialization</option>
                     <option value="obstetrics and gynecology">obstetrics and gynecology</option>
                     <option value="poultry">poultry</option>
