@@ -24,9 +24,16 @@ urlpatterns = [
     path('', home),
     path('register/', registerUser),
     path('registervet/', registervet),
+    path('verify/<str:username>/<dates>/',verifyUser),
+    path('verifyVet/<str:username>/<dates>/',verifyVet),
+    path('test/',test),
+    path('login/',login),
+
     path('verify/<str:username>/<dates>/', verifyUser),
     path('verifyVet/<str:username>/<dates>/', verifyVet),
     path('emergency/', emergency),
+    path('getVetFirstName/<str:vet_username>', getVetFirstName),
+
 
 
 
