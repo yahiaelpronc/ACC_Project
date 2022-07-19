@@ -3,3 +3,4 @@
 FinalProject2022/finalproj/vars.py
 FinalProject2022/env.bat
 vars.py
+text.txt
