@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a818b483-7c1c-4413-8f42-d6383afd8b60" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/finalproj/finalapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/finalproj/finalapp/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/finalproj/finalapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/finalproj/finalapp/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/finalproj/templates/Registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/finalproj/templates/Registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/finalproj/templates/ResendFailed.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/finalproj/templates/ResendFailed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/finalproj/templates/alreadyVerified.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/finalproj/templates/alreadyVerified.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/finalproj/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/finalproj/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/finalproj/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/finalproj/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/finalproj/templates/registervet.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/finalproj/templates/registervet.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/finalproj/templates/resendEmail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/finalproj/templates/resendEmail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/finalproj/templates/successVerified.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/finalproj/templates/successVerified.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/finalproj/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/finalproj/templates/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
