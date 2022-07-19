@@ -1,5 +1,8 @@
 from django.db import models
+from datetime import datetime
 
+# datetime object containing current date and time
+now = datetime.now()
 # Create your models here.
 
 
@@ -54,3 +57,10 @@ class locations(models.Model):
     work_hours_end = models.IntegerField(null=False)
     work_hours_end_period = models.CharField(
         max_length=2, null=False, choices=(('am', 'am'), ('pm', 'pm')))
+
+
+class Messages(models.Model):
+    content = models.CharField(max_length=300, null=False)
+    sender = models.CharField(max_length=30, null=False)
+    receiver = models.CharField(max_length=30, null=False)
+    date = models.DateField(default=now.strftime("%d/%m/%Y %H:%M:%S"))

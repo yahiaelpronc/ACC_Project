@@ -27,6 +27,7 @@ urlpatterns = [
     path('verify/<str:username>/<dates>/', verifyUser),
     path('verifyVet/<str:username>/<dates>/', verifyVet),
     path('emergency/', emergency),
+    path('getVetFirstName/<str:vet_username>', getVetFirstName),
 
 
 
