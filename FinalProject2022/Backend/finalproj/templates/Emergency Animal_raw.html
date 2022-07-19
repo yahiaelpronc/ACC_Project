@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="static/css/all.min.css" />
+    <link rel="stylesheet" href="static/css/Emergency.css" />
+    <link rel="stylesheet" href="static/css/Style.scss" />
+
+</head>
+
+<body>
+
+    <div class="header">
+        <h2 class="main-title">Emergency Animal</h2>
+    </div>
+
+
+    <!--Row with two equal columns-->
+    <div class="row">
+        <div class="col-md-4">
+            <h2 class="main-title">Location</h2>
+            <div class="wrapper">
+                <div class="card">
+                    <div class="content">hospital
+                        <p>02157 547 878</p>
+                        <p>3131 E. Thomas Road</p>
+                        <p>Phoenix, AZ 85016</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content">hospital
+                        <p>02157 547 878</p>
+                        <p>3131 E. Thomas Road</p>
+                        <p>Phoenix, AZ 85016</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content">hospital
+                        <p>02157 547 878</p>
+                        <p>3131 E. Thomas Road</p>
+                        <p>Phoenix, AZ 85016</p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-8 doctor" id="doc">
+            <h2 class="main-title">Doctors</h2>
+            <div class="demo-content bg-alt">
+                <div class=" text-center m-auto col-md-4 col-sm-7 col-xs-12">
+                    <div class="testimonials" id="testimonials">
+
+                        <div class="container">
+                            <div class="box">
+                                <img src="static/imgs/avatar-01.png" alt="" />
+                                <h3>Mohamed Farag</h3>
+                                <span class="title">Full Stack Developer</span>
+                                <div class="rate">
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis
+                                    voluptatum, amet est natus
+                                    quaerat ducimus
+                                </p>
+                                <div class="mt-2">
+                                    <button type="button" class="btn btn-primary" onclick="myFunction()">chat</button>
+                                </div>
+                            </div>
+                            <div class="box">
+                                <img src="static/imgs/avatar-02.png" alt="" />
+                                <h3>Mohamed Ibrahim</h3>
+                                <span class="title">Full Stack Developer</span>
+                                <div class="rate">
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis
+                                    voluptatum, amet est natus
+                                    quaerat ducimus
+                                </p>
+                                <div class="mt-2">
+                                    <button type="button" class="btn btn-primary" onclick="myFunction()">chat</button>
+                                </div>
+                            </div>
+                            <div class="box">
+                                <img src="static/imgs/avatar-03.png" alt="" />
+                                <h3>Shady Nabil</h3>
+                                <span class="title">Full Stack Developer</span>
+                                <div class="rate">
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="filled fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis
+                                    voluptatum, amet est natus
+                                    quaerat ducimus
+                                </p>
+                                <div class="mt-2">
+                                    <button type="button" class="btn btn-primary" onclick="myFunction()">chat</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 ">
+            <h2 class="d-none" id="title">Chat</h2>
+            <div class="pad">
+                <div class="row d-flex justify-content-center chats">
+                    <div class="col-md-12">
+                        <div class="cards card-bordered" id="card_chat">
+                            <div class="card-header">
+                                <h4 class="card-title"><strong class="text-white">Chat</strong></h4>
+                                <a class="btn btn-xs btn-secondary" href="#" data-abc="true">Prescription Medication</a>
+                                <button type="button" class="btn-close" aria-label="Close" onclick="closeWindow()">
+                                </button>
+                            </div>
+
+
+                            <div class="ps-container ps-theme-default ps-active-y" id="chat-content"
+                                style="overflow-y: scroll !important; height:400px !important;">
+                                <div class="media media-chat">
+                                    <img class="avatar"
+                                        src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
+                                    <div class="media-body">
+                                        <p>Hi</p>
+                                        <p>How are you ...???</p>
+                                        <p>What are you doing tomorrow?<br> Can we come up a bar?</p>
+                                        <p class="meta"><time datetime="2018">23:58</time></p>
+                                    </div>
+                                </div>
+
+                                <div class="media media-meta-day">Today</div>
+
+                                <div class="media media-chat media-chat-reverse">
+                                    <div class="media-body">
+                                        <p>Hiii, I'm good.</p>
+                                        <p>How are you doing?</p>
+                                        <p>Long time no see! Tomorrow office. will be free on sunday.</p>
+                                        <p class="meta"><time datetime="2018">00:06</time></p>
+                                    </div>
+                                </div>
+
+                                <div class="media media-chat">
+                                    <img class="avatar"
+                                        src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
+                                    <div class="media-body">
+                                        <p>Okay</p>
+                                        <p>We will go on sunday? </p>
+                                        <p class="meta"><time datetime="2018">00:07</time></p>
+                                    </div>
+                                </div>
+
+                                <div class="media media-chat media-chat-reverse">
+                                    <div class="media-body">
+                                        <p>That's awesome!</p>
+                                        <p>I will meet you Sandon Square sharp at 10 AM</p>
+                                        <p>Is that okay?</p>
+                                        <p class="meta"><time datetime="2018">00:09</time></p>
+                                    </div>
+                                </div>
+
+                                <div class="media media-chat">
+                                    <img class="avatar"
+                                        src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
+                                    <div class="media-body">
+                                        <p>Okay i will meet you on Sandon Square </p>
+                                        <p class="meta"><time datetime="2018">00:10</time></p>
+                                    </div>
+                                </div>
+
+                                <div class="media media-chat media-chat-reverse">
+                                    <div class="media-body">
+                                        <p>Do you have pictures of Matley Marriage?</p>
+                                        <p class="meta"><time datetime="2018">00:10</time></p>
+                                    </div>
+                                </div>
+
+                                <div class="media media-chat">
+                                    <img class="avatar"
+                                        src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
+                                    <div class="media-body">
+                                        <p>Sorry I don't have. i changed my phone.</p>
+                                        <p class="meta"><time datetime="2018">00:12</time></p>
+                                    </div>
+                                </div>
+
+                                <div class="media media-chat media-chat-reverse">
+                                    <div class="media-body">
+                                        <p>Okay then see you on sunday!!</p>
+                                        <p class="meta"><time datetime="2018">00:12</time></p>
+                                    </div>
+                                </div>
+
+                                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
+                                    <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                                </div>
+                                <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;">
+                                    <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="publisher bt-1 border-light">
+                                <img class="avatar avatar-xs"
+                                    src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
+                                <form action="">
+                                    <input class="publisher-input" type="text" placeholder="Write something">
+                                </form>
+                                <a class="publisher-btn text-info" href="#" data-abc="true"><i
+                                        class="fa fa-paper-plane"></i></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function myFunction() {
+            document.getElementById("card_chat").style.display = "block";
+            document.getElementById("doc").setAttribute("class", "col-md-4");
+            document.getElementById("title").setAttribute("class", "d-block main-title");
+        }
+
+        function closeWindow() {
+            document.getElementById("card_chat").style.display = "none";
+            document.getElementById("doc").setAttribute("class", "col-md-8");
+            document.getElementById("title").setAttribute("class", "d-none");
+
+        }
+    </script>
+    <script src="static/js/all.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+
+</html>
