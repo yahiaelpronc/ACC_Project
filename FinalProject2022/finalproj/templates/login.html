@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<head>
+    {%load static%}
+    <meta charset="UTF-8" />
+    <title>LogIn and SignUp Page</title>
+    <link rel="stylesheet" href=" {%static 'login.css'%}" />
+    <script src="login.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="page">
+            <div class="header">
+                <a id="login" class="active" href="#login">login</a>
+                <a id="signup" href="http://127.0.0.1:8000/final/register/">Register as Vet</a>
+                <a id="signupVet" href="http://127.0.0.1:8000/final/registervet/">Register as User</a>
+            </div>
+            <div id="errorMsg"></div>
+            <div class="content">
+                <form class="login" name="loginForm" onsubmit="validateLoginForm()" action="/final/login/" method="post">
+                    {%csrf_token%}
+                    <div class="frist">
+                        <label for="logName">Username</label>
+                        <input type="text" name="username" id="logName" placeholder="Username" />
+                         <span style="font-size:0.8rem;color:red" class="text-danger">{{notfound}}</span>
+                    </div>
+
+                    <div class="frist">
+                        <label for="logPassword">Password</label>
+                        <input type="password" name="password" id="logPassword" placeholder="Password" />
+                        <span class="text-danger">{{passerr}}</span>
+                    </div>
+                    <div id="check">
+                        <input type="checkbox" id="remember" />
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <br />
+                    <input type="submit" value="Login" />
+                    <a href="#">Forgot Password?</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="{%static 'login.js'%}"></script>
+</body>

@@ -17,7 +17,7 @@ import re
 #     return HttpResponse("yes")
 
 
-def verifyUser(req,username,dates):
+def verifyUser(request,username,dates):
     myuser=Myuser.objects.get(username=username)
     date1 = str(dates)
     date1 = dates.split('-')
@@ -38,18 +38,18 @@ def verifyUser(req,username,dates):
 
     if(myuser != None ):
         if(expireDay > 0 or expireMonth > 0 or expireYear > 0):
-            didResend=sendEmail(req,myuser.email,resend=True,username=myuser.username)
+            didResend=sendEmail(request,myuser.email,resend=True,username=myuser.username)
             if(didResend):
-                return HttpResponse("Verfication Expired , Email Resent!")
+                return render(request, 'resendEmail.html')
             else:
-                return HttpResponse("Verfication Expired , Resend Failed!")
+                return render(request, 'ResendFailed.html')
         else:
             if(myuser.active_status):
-                return HttpResponse("Your Account is Already Verified")
+                return render(request, 'alreadyVerified.html')
             else:
                 myuser.active_status=True
                 myuser.save()
-                return HttpResponse("You Account Has Been Verified!")
+                return render(request, 'successVerified.html')
     else:
         return HttpResponse("The User You're Trying to Verify Doesn't Exist")
 
@@ -57,7 +57,7 @@ def verifyUser(req,username,dates):
 
 
 
-def verifyVet(req,username,dates):
+def verifyVet(request,username,dates):
     myvet=Vet.objects.get(username=username)
     date1 = str(dates)
     date1 = dates.split('-')
@@ -78,22 +78,25 @@ def verifyVet(req,username,dates):
 
     if(myvet != None ):
         if(expireDay > 0 or expireMonth > 0 or expireYear > 0):
-            didResend=sendEmail(req,myvet.email,resend=True,username=myvet.username)
+            didResend=sendEmail(request,myvet.email,resend=True,username=myvet.username)
             if(didResend):
-                return HttpResponse("Verfication Expired , Email Resent!")
+                return render(request,'resendEmail.html')
             else:
-                return HttpResponse("Verfication Expired , Resend Failed!")
+                return render(request, 'ResendFailed.html')
+
         else:
             if(myvet.active_status):
-                return HttpResponse("Your Account is Already Verified")
+                return render(request, 'alreadyVerified.html')
+
             else:
                 myvet.active_status=True
                 myvet.save()
-                return HttpResponse("You Account Has Been Verified!")
+                return render(request, 'successVerified.html')
+
     else:
         return HttpResponse("The User You're Trying to Verify Doesn't Exist")
 
-def sendEmail(req,recepient,resend=False,username=None):
+def sendEmail(request,recepient,resend=False,username=None):
     socket.getaddrinfo('localhost',8000)
     fromaddr=settings.EMAIL_HOST_USER
     toaddr=recepient
@@ -104,22 +107,22 @@ def sendEmail(req,recepient,resend=False,username=None):
     server.ehlo()
     server.login(fromaddr,varA)
     if(resend):
-        link='http://127.0.0.1:8000/final/verify/' + req.POST['username'] + '/' +str(date.today())
+        link='http://127.0.0.1:8000/final/verify/' + request.POST['username'] + '/' +str(date.today())
         # myuser=Myuser.objects.get(username=username)
         # myuser.active_link=link
         # myuser.save()
         text='hello  '+username+'  please Verify your account here  ' + link
-        subject='Animal Care Center Site 2022 By ITI  , ' +req.POST['username']
+        subject='Animal Care Center Site 2022 By ITI  , ' +request.POST['username']
         mailtext='subject : '+ subject+'\n\n'+text
         server.sendmail(fromaddr,toaddr,mailtext)
         server.quit()
         return True
-    link='http://127.0.0.1:8000/final/verify/'+req.POST['username'] +'/'+str(date.today())
+    link='http://127.0.0.1:8000/final/verify/'+request.POST['username'] +'/'+str(date.today())
     # myuser=Myuser.objects.get(username=req.POST['username'])
     # myuser.active_link=link
     # myuser.save()
-    text='hello '+req.POST['username']+'  please Verify your account from here  '+link
-    subject='Animal Care Center Site 2022 By ITI , '+req.POST['username']
+    text='hello '+request.POST['username']+'  please Verify your account from here  '+link
+    subject='Animal Care Center Site 2022 By ITI , '+request.POST['username']
     mailtext='subject : ' +subject +'\n\n' +text
     server.sendmail(fromaddr,toaddr,mailtext)
     server.quit()
@@ -127,7 +130,7 @@ def sendEmail(req,recepient,resend=False,username=None):
 
 
 
-def sendEmailVet(req,recepient,resend=False,username=None):
+def sendEmailVet(request,recepient,resend=False,username=None):
     socket.getaddrinfo('localhost',8000)
     fromaddr=settings.EMAIL_HOST_USER
     toaddr=recepient
@@ -138,156 +141,190 @@ def sendEmailVet(req,recepient,resend=False,username=None):
     server.ehlo()
     server.login(fromaddr,varA)
     if(resend):
-        link='http://127.0.0.1:8000/final/verifyVet/' + req.POST['username'] + '/' +str(date.today())
+        link='http://127.0.0.1:8000/final/verifyVet/' + request.POST['username'] + '/' +str(date.today())
         # myuser=Myuser.objects.get(username=username)
         # myuser.active_link=link
         # myuser.save()
         text='hello  '+username+'  please Verify your account here  ' + link
-        subject='Animal Care Center Site 2022 By ITI  , ' +req.POST['username']
+        subject='Animal Care Center Site 2022 By ITI  , ' +request.POST['username']
         mailtext='subject : '+ subject+'\n\n'+text
         server.sendmail(fromaddr,toaddr,mailtext)
         server.quit()
         return True
-    link='http://127.0.0.1:8000/final/verifyVet/'+req.POST['username'] +'/'+str(date.today())
+    link='http://127.0.0.1:8000/final/verifyVet/'+request.POST['username'] +'/'+str(date.today())
     # myuser=Myuser.objects.get(username=req.POST['username'])
     # myuser.active_link=link
     # myuser.save()
-    text='hello '+req.POST['username']+'  please Verify your account from here  '+link
-    subject='Animal Care Center Site 2022 By ITI , '+req.POST['username']
+    text='hello '+request.POST['username']+'  please Verify your account from here  '+link
+    subject='Animal Care Center Site 2022 By ITI , '+request.POST['username']
     mailtext='subject : ' +subject +'\n\n' +text
     server.sendmail(fromaddr,toaddr,mailtext)
     server.quit()
 
 
 
-def registerUser(req):
-    if(req.method == 'GET'):
-        return render(req,'Registration.html')
+def registerUser(request):
+    if(request.method == 'GET'):
+        return render(request,'Registration.html')
     else:
         name_reg=r"^[a-zA-Z ,.'-]{4,20}$"
         email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
         phone_regex = r'^01[0125][0-9]{8}$'
 
-        if(re.search(name_reg,req.POST['username']) == None):
+        if(re.search(name_reg,request.POST['username']) == None):
             context = {}
             context['errusername'] = 'This Username Is Not Valid, Enter Valid UserName'
-            return render(req,'Registration.html',context)
+            return render(request,'Registration.html',context)
 
-        if(re.search(name_reg,req.POST['firstname']) == None):
+        if(re.search(name_reg,request.POST['firstname']) == None):
             context = {}
             context['errfirstname'] = 'This firstname Is Not Valid, Enter Valid firstname'
-            return render(req,'Registration.html',context)
+            return render(request,'Registration.html',context)
 
-        if(re.search(name_reg,req.POST['lastname']) == None):
+        if(re.search(name_reg,request.POST['lastname']) == None):
             context = {}
             context['errlastname'] = 'This lastname Is Not Valid, Enter Valid lastname'
-            return render(req,'Registration.html',context)
+            return render(request,'Registration.html',context)
 
-        if(re.search(email_regex,req.POST['email']) == None):
+        if(re.search(email_regex,request.POST['email']) == None):
             context = {}
             context['erremail'] = 'This email Is Not Valid, Enter Valid email'
-            return render(req,'Registration.html',context)
+            return render(request,'Registration.html',context)
 
 
-        if(re.search(phone_regex,req.POST['mobile']) == None):
+        if(re.search(phone_regex,request.POST['mobile']) == None):
             context = {}
             context['errmobile'] = 'This mobile Is Not Valid, Enter Valid mobile'
-            return render(req,'Registration.html',context)
-        if(req.POST['password'] != req.POST['confirmpassword']):
+            return render(request,'Registration.html',context)
+        if(request.POST['password'] != request.POST['confirmpassword']):
             context={}
             context['errnotequal']='confirm password must equal to password'
-            return render (req,'Registration.html',context)
+            return render (request,'Registration.html',context)
         else:
 
-            username=req.POST['username']
-            firstname=req.POST['firstname']
-            lastname=req.POST['lastname']
-            profile_pic=req.FILES['profile_pic']
-            email=req.POST['email']
-            password=req.POST['password']
-            confirmpassword=req.POST['confirmpassword']
-            mobile=req.POST['mobile']
-            b_date=req.POST['b_date']
-            country=req.POST['country']
-            face_link=req.POST['face_link']
+            username=request.POST['username']
+            firstname=request.POST['firstname']
+            lastname=request.POST['lastname']
+            profile_pic=request.FILES['profile_pic']
+            email=request.POST['email']
+            password=request.POST['password']
+            confirmpassword=request.POST['confirmpassword']
+            mobile=request.POST['mobile']
+            b_date=request.POST['b_date']
+            country=request.POST['country']
+            face_link=request.POST['face_link']
 
             myuser=Myuser.objects.create(username=username,firstname=firstname,lastname=lastname,profile_pic=profile_pic,
                               email=email,password=password,mobile=mobile,b_date=b_date,country=country,
                                          face_link=face_link)
-            recepient=req.POST['email']
-            sendEmail(req,recepient)
+            recepient=request.POST['email']
+            sendEmail(request,recepient)
 
             return HttpResponse('inserted')
 
 
-def registervet(req):
-    if(req.method == 'GET'):
-        return render(req,'registervet.html')
+def registervet(request):
+    if(request.method == 'GET'):
+        return render(request,'registervet.html')
     else:
         name_reg=r"^[a-zA-Z ,.'-]{4,20}$"
         email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
         phone_regex = r'^01[0125][0-9]{8}$'
         address_reg=r"^[a-zA-Z ,.'-]{4,40}$"
-        if(re.search(name_reg,req.POST['username']) == None):
+        if(re.search(name_reg,request.POST['username']) == None):
             context = {}
             context['errusername'] = 'This Username Is Not Valid, Enter Valid UserName'
-            return render(req,'registervet.html',context)
-        if (re.search(name_reg, req.POST['firstname']) == None):
+            return render(request,'registervet.html',context)
+        if (re.search(name_reg, request.POST['firstname']) == None):
             context = {}
             context['errfirstname'] = 'This firstname Is Not Valid, Enter Valid firstname'
-            return render(req, 'registervet.html', context)
+            return render(request, 'registervet.html', context)
 
-        if (re.search(name_reg, req.POST['lastname']) == None):
+        if (re.search(name_reg, request.POST['lastname']) == None):
             context = {}
             context['errlastname'] = 'This lastname Is Not Valid, Enter Valid lastname'
-            return render(req, 'registervet.html', context)
+            return render(request, 'registervet.html', context)
 
-        if (re.search(email_regex, req.POST['email']) == None):
+        if (re.search(email_regex, request.POST['email']) == None):
             context = {}
             context['erremail'] = 'This email Is Not Valid, Enter Valid email'
-            return render(req, 'registervet.html', context)
+            return render(request, 'registervet.html', context)
 
-        if (re.search(phone_regex, req.POST['mobile']) == None):
+        if (re.search(phone_regex, request.POST['mobile']) == None):
             context = {}
             context['errmobile'] = 'This mobile Is Not Valid, Enter Valid mobile'
-            return render(req, 'registervet.html', context)
-        if (req.POST['password'] != req.POST['confirmpassword']):
+            return render(request, 'registervet.html', context)
+        if (request.POST['password'] != request.POST['confirmpassword']):
             context = {}
             context['errnotequal'] = 'confirm password must equal to password'
-            return render(req, 'registervet.html', context)
-        if(re.search(address_reg,req.POST['address']) == None):
+            return render(request, 'registervet.html', context)
+        if(re.search(address_reg,request.POST['address']) == None):
             context={}
             context['erraddress']= 'this address is not valid '
-            return render(req, 'registervet.html', context)
+            return render(request, 'registervet.html', context)
 
         else:
-            username = req.POST['username']
-            firstname = req.POST['firstname']
-            lastname = req.POST['lastname']
-            profile_pic = req.FILES['profile_pic']
-            email = req.POST['email']
-            password = req.POST['password']
-            mobile = req.POST['mobile']
-            b_date = req.POST['b_date']
-            country = req.POST['country']
-            face_link = req.POST['face_link']
-            specialization=req.POST['specialization']
-            address=req.POST['address']
+            username = request.POST['username']
+            firstname = request.POST['firstname']
+            lastname = request.POST['lastname']
+            profile_pic = request.FILES['profile_pic']
+            email = request.POST['email']
+            password = request.POST['password']
+            mobile = request.POST['mobile']
+            b_date = request.POST['b_date']
+            country = request.POST['country']
+            face_link = request.POST['face_link']
+            specialization=request.POST['specialization']
+            address=request.POST['address']
 
             MYvet=Vet.objects.create(username=username,firstname=firstname,lastname=lastname,profile_pic=profile_pic,
                                      email=email,password=password,mobile=mobile,b_date=b_date,country=country,
                                          face_link=face_link,specialization=specialization,address=address)
-            recepient = req.POST['email']
-            sendEmailVet(req, recepient)
+            recepient = request.POST['email']
+            sendEmailVet(request, recepient)
 
             return HttpResponse('inserted')
 
+def login(request):
+    if(request.method == 'GET'):
+        return render(request,'login.html')
+    else:
+        myuser=Myuser.objects.filter(username=request.POST['username'],password=request.POST['password'])
+        myvet=Vet.objects.filter(username=request.POST['username'],password=request.POST['password'])
+
+        if(len(myuser) != 0):
+
+            myuser1=Myuser.objects.get(username=request.POST['username'])
+            if(myuser1.active_status == False):
+                return HttpResponse("this account is not Verified")
+            else:
+                request.session['username'] = request.POST['username']
+                return render(request, 'home.html')
+        if(len(myvet) != 0):
+            myvet1 = Vet.objects.get(username=request.POST['username'])
+            if(myvet1.active_status == False):
+                return HttpResponse("this account is not Verified")
+            else:
+                request.session['username']=request.POST['username']
+                return render(request,'home.html')
+
+
+        else:
+            context={}
+            context['notfound']='this username and password are not correct'
+            return render(request,'login.html',context)
 
 
 
 
 
 
+
+
+
+
+def test(request):
+    return render(request,'alreadyVerified.html')
 
 
 
