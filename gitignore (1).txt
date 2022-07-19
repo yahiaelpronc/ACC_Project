@@ -1,0 +1,5 @@
+.env.bat
+.vars.py
+Project/vars.py
+Project/env.bat
+test.txt
