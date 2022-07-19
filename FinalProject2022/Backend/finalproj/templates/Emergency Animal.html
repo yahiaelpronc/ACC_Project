@@ -9,112 +9,54 @@
 </div>
 
 <!--Row with two equal columns-->
+
+
 <div class="row">
     <div class="col-md-4">
         <h2 class="main-title">Location</h2>
         <div class="wrapper">
+            {% for location in Locations %}
             <div class="card">
-                <div class="content">hospital
-                    <p>02157 547 878</p>
-                    <p>3131 E. Thomas Road</p>
-                    <p>Phoenix, AZ 85016</p>
+                    <img src="{{location.picture.url}}" alt="">
+                    <div class="content">
+                    <h4>{{location.name}}</h4>
+                    <p>Phone Number : {{location.mobile}}</p>
+                    <p>Address : {{location.address}}</p>
+                    <p>Website : <a href="{{location.website_link}}" target="blank">{{location.website_link}}</a></p>
+                    <p>Open From : {{location.work_hours_start}}-{{location.work_hours_start_period}}</p>
+                    <p>To : {{location.work_hours_end}}-{{location.work_hours_end_period}}</p>
                 </div>
             </div>
-            <div class="card">
-                <div class="content">hospital
-                    <p>02157 547 878</p>
-                    <p>3131 E. Thomas Road</p>
-                    <p>Phoenix, AZ 85016</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">hospital
-                    <p>02157 547 878</p>
-                    <p>3131 E. Thomas Road</p>
-                    <p>Phoenix, AZ 85016</p>
-                </div>
-            </div>
-
-
+            {% endfor %}
         </div>
     </div>
-    <div class="col-md-8 doctor">
+    <div class="col-md-8 doctor" id="doc">
         <h2 class="main-title">Doctors</h2>
         <div class="demo-content bg-alt">
             <div class=" text-center m-auto col-md-4 col-sm-7 col-xs-12">
                 <div class="testimonials" id="testimonials">
 
-                    <div class="container1">
+                    <div class="container container1">
+                        {% for vet in vets %}
                         <div class="box">
-                            <img src="imgs/avatar-01.png" alt="" />
-                            <h3>Mohamed Farag</h3>
-                            <span class="title">Full Stack Developer</span>
-                            <div class="rate">
-                                <i class="filled fas fa-star"></i>
-                                <i class="filled fas fa-star"></i>
-                                <i class="filled fas fa-star"></i>
-                                <i class="filled fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis
-                                voluptatum, amet est natus
-                                quaerat ducimus
-                            </p>
+                            <img src="{{vet.profile_pic.url}}" alt="" />
+                            <h3>Vet Name : {{vet.firstname}}</h3>
+                            <span class="title">Specialization : {{vet.specialization}}</span>
+                            <p>Phone : {{vet.mobile}}</p>
                             <div class="mt-2">
                                 <button type="button" class="btn btn-primary" onclick="myFunction()">chat</button>
                             </div>
                         </div>
-                        <div class="box">
-                            <img src="imgs/avatar-02.png" alt="" />
-                            <h3>Mohamed Ibrahim</h3>
-                            <span class="title">Full Stack Developer</span>
-                            <div class="rate">
-                                <i class="filled fas fa-star"></i>
-                                <i class="filled fas fa-star"></i>
-                                <i class="filled fas fa-star"></i>
-                                <i class="filled fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis
-                                voluptatum, amet est natus
-                                quaerat ducimus
-                            </p>
-                            <div class="mt-2">
-                                <button type="button" class="btn btn-primary" onclick="myFunction()">chat</button>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <img src="imgs/avatar-03.png" alt="" />
-                            <h3>Shady Nabil</h3>
-                            <span class="title">Full Stack Developer</span>
-                            <div class="rate">
-                                <i class="filled fas fa-star"></i>
-                                <i class="filled fas fa-star"></i>
-                                <i class="filled fas fa-star"></i>
-                                <i class="filled fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis
-                                voluptatum, amet est natus
-                                quaerat ducimus
-                            </p>
-                            <div class="mt-2">
-                                <button type="button" class="btn btn-primary" onclick="myFunction()">chat</button>
-                            </div>
-                        </div>
-
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-
-
+    </div>
+    <div class="col-md-4 ">
         <div class="pad">
             <div class="row d-flex justify-content-center chats">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="cards card-bordered" id="card_chat">
                         <div class="card-header">
                             <h4 class="card-title"><strong class="text-white">Chat</strong></h4>
@@ -148,56 +90,7 @@
                                 </div>
                             </div>
 
-                            <div class="media media-chat">
-                                <img class="avatar"
-                                    src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                                <div class="media-body">
-                                    <p>Okay</p>
-                                    <p>We will go on sunday? </p>
-                                    <p class="meta"><time datetime="2018">00:07</time></p>
-                                </div>
-                            </div>
 
-                            <div class="media media-chat media-chat-reverse">
-                                <div class="media-body">
-                                    <p>That's awesome!</p>
-                                    <p>I will meet you Sandon Square sharp at 10 AM</p>
-                                    <p>Is that okay?</p>
-                                    <p class="meta"><time datetime="2018">00:09</time></p>
-                                </div>
-                            </div>
-
-                            <div class="media media-chat">
-                                <img class="avatar"
-                                    src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                                <div class="media-body">
-                                    <p>Okay i will meet you on Sandon Square </p>
-                                    <p class="meta"><time datetime="2018">00:10</time></p>
-                                </div>
-                            </div>
-
-                            <div class="media media-chat media-chat-reverse">
-                                <div class="media-body">
-                                    <p>Do you have pictures of Matley Marriage?</p>
-                                    <p class="meta"><time datetime="2018">00:10</time></p>
-                                </div>
-                            </div>
-
-                            <div class="media media-chat">
-                                <img class="avatar"
-                                    src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                                <div class="media-body">
-                                    <p>Sorry I don't have. i changed my phone.</p>
-                                    <p class="meta"><time datetime="2018">00:12</time></p>
-                                </div>
-                            </div>
-
-                            <div class="media media-chat media-chat-reverse">
-                                <div class="media-body">
-                                    <p>Okay then see you on sunday!!</p>
-                                    <p class="meta"><time datetime="2018">00:12</time></p>
-                                </div>
-                            </div>
 
                             <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
                                 <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
@@ -224,13 +117,26 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
+
 <script>
     function myFunction() {
         document.getElementById("card_chat").style.display = "block";
+        document.getElementById("doc").setAttribute("class", "col-md-4");
+        document.getElementById("title").setAttribute("class", "d-block main-title");
     }
 
     function closeWindow() {
         document.getElementById("card_chat").style.display = "none";
+        document.getElementById("doc").setAttribute("class", "col-md-8");
+        document.getElementById("title").setAttribute("class", "d-none");
+
     }
 </script>
 <script src="{% static 'js/all.min.js' %}"></script>

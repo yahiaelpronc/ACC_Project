@@ -245,7 +245,7 @@ img {
 
 
 
-
+.pad {}
 
 .card-bordered {
   border: 1px solid #ebebeb;
@@ -259,16 +259,17 @@ img {
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
   -webkit-transition: .5s;
   transition: .5s;
-  width: 35%;
+  width: 24%;
+  position: fixed;
+  bottom: -30px;
+  right: 1px;
   display: none;
-  position: absolute;
-  top: 20%;
-  right: 5%;
   background-color: #5B6068;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+
 }
 
 .padding {

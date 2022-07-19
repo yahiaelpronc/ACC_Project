@@ -22,7 +22,14 @@ def home(request):
 
 
 def emergency(request):
-    return render(request, 'Emergency Animal.html')
+    if(request.method == "POST"):
+        return render(request, 'Emergency Animal.html')
+    vets = Vet.objects.all()
+    Locations = locations.objects.all()
+    context = {}
+    context['vets'] = vets
+    context['Locations'] = Locations
+    return render(request, 'Emergency Animal.html', context)
 
 
 def verifyUser(req, username, dates):
