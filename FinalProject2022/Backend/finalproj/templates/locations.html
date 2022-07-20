@@ -1,0 +1,36 @@
+{%extends 'base.html '%}
+
+{%load static%}
+{%block title%}
+    List Locations
+    {%endblock%}
+    
+
+    {%block content%}
+
+    <!-- start of Cards of Animal Care Locations -->
+    <div class="articles" id="articles">
+        <h2 class="main-title">Animal Care Locations</h2>
+        <div class="container">
+          {% for location in locations%}
+            <div class="box">
+               <img src="{{location.picture.url}}" alt="" />
+               <div class="content">
+                 <h5>{{location.name}}</h5>
+                 <p>{{location.email}}</p>
+                 <p> {{location.address}}</p>
+              </div>
+              <div class="info">
+                <a href="http://127.0.0.1:8000/locationdetails/{{location.id}}">Details</a>
+                <i class="fas fa-long-arrow-alt-right"></i>
+              </div>
+            </div>
+          {%endfor%}
+
+
+
+        </div>
+      </div>
+      <div class="spikes"></div>
+      <!--  Ends of Cards of Animal Care Locations-->
+    {%endblock%}

@@ -23,6 +23,66 @@ import re
 def home(request):
     return render(request, 'home.html')
 
+def locationDetails(request,id):
+    mylocation=locations.objects.get(id=id)
+    context={}
+    context['location']=mylocation
+    return render(request,'details.html',context)
+
+def listlocations(request):
+    myloctions=locations.objects.all()
+    context={}
+    context['locations']=myloctions
+    return render(request,'locations.html',context)
+
+def addlocation(request):
+    if(request.method == 'GET'):
+        return render(request,'Admin.html')
+    else:
+        name_reg = r"^[a-zA-Z ,.'-]{4,30}$"
+        email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        phone_regex = r'^01[0125][0-9]{8}$'
+        address_reg = r"^[a-zA-Z ,.'-]{4,40}$"
+
+        if(re.search(name_reg,request.POST['name']) == None):
+            context={}
+            context['errname']='this name is not valid ,type a valid one'
+            return render(request,'Admin.html',context)
+        if(re.search(address_reg,request.POST['address']) == None):
+            context={}
+            context['erraddress']='this address is not valid ,type a valid one'
+            return render(request,'Admin.html',context)
+        if(int(request.POST['work_start']) > 12 or int(request.POST['work_start']) < 0 ):
+            context = {}
+            context['errworkstart'] = 'please enter a number btw 1 and 12'
+            return render(request, 'Admin.html', context)
+        if(int(request.POST['work_end']) > 12 or int(request.POST['work_end']) < 0 ):
+            context = {}
+            context['errworkend'] = 'please enter a number btw 1 and 12'
+            return render(request, 'Admin.html', context)
+
+        if(re.search(email_regex,request.POST['email']) == None):
+            context = {}
+            context['erremail'] = 'this email is not valid ,type a valid one'
+            return render(request, 'Admin.html', context)
+
+        if(re.search(phone_regex,request.POST['mobile']) == None):
+            context = {}
+            context['errmobile'] = 'this mobile is not valid ,type a valid one'
+            return render(request, 'Admin.html', context)
+        else:
+            location=locations.objects.create(name=request.POST['name'],email=request.POST['email'],
+                                              address=request.POST['address'],mobile=request.POST['mobile'],
+                                              website_link=request.POST['website_link'],picture=request.FILES['picture'],
+                                              work_hours_start=request.POST['work_start'],work_hours_end=request.POST['work_end'],
+                                              work_hours_start_period=request.POST['start_period'],
+                                              work_hours_end_period=request.POST['end_period'],
+
+                                              )
+            return render(request,'Admin.html')
+
+
+
 
 def getVetFirstName(request, vet_username):
     print("inside view ------------------------------------------------")
@@ -116,7 +176,7 @@ def verifyVet(request, username, dates):
 
             didResend=sendEmail(request,myvet.email,resend=True,username=myvet.username)
 
-            didResend = sendEmail(
+            didResend = sendEmailVet(
                 request, myvet.email, resend=True, username=myvet.username)
 
             if(didResend):
@@ -157,7 +217,7 @@ def sendEmail(request, recepient, resend=False, username=None):
     server.login(fromaddr, varA)
     if(resend):
 
-        link='http://127.0.0.1:8000/final/verify/' + request.POST['username'] + '/' +str(date.today())
+        link='http://127.0.0.1:8000/verify/' + request.POST['username'] + '/' +str(date.today())
         # myuser=Myuser.objects.get(username=username)
         # myuser.active_link=link
         # myuser.save()
@@ -167,7 +227,7 @@ def sendEmail(request, recepient, resend=False, username=None):
         server.sendmail(fromaddr,toaddr,mailtext)
         server.quit()
         return True
-    link='http://127.0.0.1:8000/final/verify/'+request.POST['username'] +'/'+str(date.today())
+    link='http://127.0.0.1:8000/verify/'+request.POST['username'] +'/'+str(date.today())
     # myuser=Myuser.objects.get(username=req.POST['username'])
     # myuser.active_link=link
     # myuser.save()
@@ -181,13 +241,19 @@ def sendEmail(request, recepient, resend=False, username=None):
 
 
 def sendEmailVet(request,recepient,resend=False,username=None):
+
     socket.getaddrinfo('localhost',8000)
     fromaddr=settings.EMAIL_HOST_USER
     toaddr=recepient
-    server=smtplib.SMTP('smtp.gmail.com', 587)
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.connect("smtp.gmail.com",587)
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
+    server.login(fromaddr,varA)
     if(resend):
 
-        link = 'http://127.0.0.1:8000/verify/' + \
+        link = 'http://127.0.0.1:8000/verifyVet/' + \
             request.POST['username'] + '/' + str(date.today())
         # myuser=Myuser.objects.get(username=username)
         # myuser.active_link=link
@@ -199,14 +265,14 @@ def sendEmailVet(request,recepient,resend=False,username=None):
         server.sendmail(fromaddr, toaddr, mailtext)
         server.quit()
         return True
-    link = 'http://127.0.0.1:8000/verify/' + \
+    link = 'http://127.0.0.1:8000/verifyVet/' + \
         request.POST['username'] + '/'+str(date.today())
     # myuser=Myuser.objects.get(username=req.POST['username'])
     # myuser.active_link=link
     # myuser.save()
     text = 'hello '+request.POST['username'] + \
         '  please Verify your account from here  '+link
-    subject = 'Animal Care Center Site 2022 By ITI , '+req.POST['username']
+    subject = 'Animal Care Center Site 2022 By ITI , '+request.POST['username']
     mailtext = 'subject : ' + subject + '\n\n' + text
     server.sendmail(fromaddr, toaddr, mailtext)
     server.quit()
@@ -348,14 +414,14 @@ def login(request):
 
             myuser1=Myuser.objects.get(username=request.POST['username'])
             if(myuser1.active_status == False):
-                return HttpResponse("this account is not Verified")
+                return render(request, 'notVerified.html')
             else:
                 request.session['username'] = request.POST['username']
                 return render(request, 'home.html')
         if(len(myvet) != 0):
             myvet1 = Vet.objects.get(username=request.POST['username'])
             if(myvet1.active_status == False):
-                return HttpResponse("this account is not Verified")
+                return render(request,'notVerified.html')
             else:
                 request.session['username']=request.POST['username']
                 return render(request,'home.html')
@@ -376,7 +442,10 @@ def login(request):
 
 
 def test(request):
-    return render(request,'alreadyVerified.html')
+    return render(request,'Admin.html')
+
+
+
 
 
 

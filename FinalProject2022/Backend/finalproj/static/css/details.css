@@ -1,0 +1,39 @@
+#image{
+    height: 350px;
+    width: 500px;
+    transition: width 2s height;
+}
+#image:hover{
+    width: 530px;
+    height: 360px;
+    transform: scaleY(1.5);
+    
+}
+.form1{
+    border: 1px solid #f5af1b;
+    border-radius: 20px;
+}
+  .box .line {
+    display: flex;
+    align-items: center;
+    color: #b9b9b9;
+    margin-bottom: 30px;
+    margin-left: 5%;
+    margin-top: 2%;
+    color: black;
+  }
+  .box .line i {
+    font-size: 25px;
+    color: var(--main-color);
+    margin-right: 10px;
+  }
+  .form1 h5{
+   
+    margin-left: 30%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    color: #1787e0;
+  }
+ .divMain{
+    margin-top: 5%;
+ }

@@ -21,6 +21,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('addlocation/',addlocation),
+    path('listlocations/',listlocations),
+    path('locationdetails/<int:id>/',locationDetails),
     path('', home),
     path('register/', registerUser),
     path('registervet/', registervet),
