@@ -122,6 +122,7 @@
 
 <script>
     var input = document.getElementById("Message");
+    var chatInterval;
     input.addEventListener("keypress", function (event) {
         // If the user presses the "Enter" key on the keyboard
         if (event.key === "Enter") {
@@ -139,18 +140,14 @@
         ViewMessage(vet)
     }
 
-    function closeWindow() {
-        document.getElementById("card_chat").style.display = "none";
-        document.getElementById("doc").setAttribute("class", "col-md-8");
-        // document.getElementById("title").setAttribute("class", "d-none");
-    }
 
 
 
 
 
+var scrollNeeded = true;
 
-    function ViewMessage(vet_username, add = false, newMessage = "") {
+    function ViewMessage(vet_username) {
         $.ajax({
             url: "/getVetFirstName/" + vet_username,
             success: function (data) {
@@ -158,18 +155,18 @@
                 document.getElementById("receiver-name").innerHTML = data.vet.firstname;
             }
         })
-        // GET MESSAGES
-        $.ajax({
-            url: "/viewMessages/",
-            success: function (data) {
-                console.log("Data Of View Messages : ")
-                console.log(data.Messages, typeof (data.Messages))
-                // UPDATE CHATBOX
-                if (add == false) {
+        chatInterval = setInterval(function () {
+            // GET MESSAGES
+            $.ajax({
+                url: "/viewMessages/",
+                success: function (data) {
+                    console.log("Data Of View Messages : ")
+                    console.log(data.Messages, typeof (data.Messages))
+                    // UPDATE CHATBOX
                     $('#MessageDivReverse').html('');
                     $('#MessageDiv').html('');
                     for (const key in data.Messages) {
-                        // console.log(`${key}: ${data.Messages[key].content}`);
+                        console.log(`${key}: ${data.Messages[key].content}`);
                         const para = document.createElement("p");
                         para.innerHTML = data.Messages[key].content;
                         const time = document.createElement("p");
@@ -177,56 +174,33 @@
                         day = data.Messages[key].date.split("-")[2]
                         day = day.split("T")[0]
                         time.innerHTML = month + "/" + day;
-                        time.classList.add("meta");
                         const sender = document.createElement("p");
                         sender.innerHTML = data.Messages[key].sender;
+                        time.classList.add("meta");
                         sender.classList.add("meta");
-                        if (data.Messages[key].sender == "{{request.session.username}}") {
-                            document.getElementById("MessageDivReverse").appendChild(sender);
-                            document.getElementById("MessageDivReverse").appendChild(para);
-                            document.getElementById("MessageDivReverse").appendChild(time);
-                            let scroll_to_bottom = document.getElementById('chat-content');
-                            scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
-                        } else {
-                            document.getElementById("MessageDiv").appendChild(sender);
-                            document.getElementById("MessageDiv").appendChild(para);
-                            document.getElementById("MessageDiv").appendChild(time);
-                            let scroll_to_bottom = document.getElementById('chat-content');
-                            scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
-                        }
-                    }
-                } else {
-                    last = data.Messages[Object.keys(data.Messages)[Object.keys(data.Messages).length - 1]]
-                    const para = document.createElement("p");
-                    para.innerHTML = newMessage;
-                    const time = document.createElement("p");
-                    month = last.date.split("-")[1]
-                    day = last.date.split("-")[2]
-                    day = day.split("T")[0]
-                    time.innerHTML = month + "/" + day;
-                    time.classList.add("meta");
-                    const sender = document.createElement("p");
-                    sender.innerHTML = last.sender;
-                    sender.classList.add("meta");
-                    if (last.sender == "{{request.session.username}}") {
                         document.getElementById("MessageDivReverse").appendChild(sender);
                         document.getElementById("MessageDivReverse").appendChild(para);
                         document.getElementById("MessageDivReverse").appendChild(time);
-                        let scroll_to_bottom = document.getElementById('chat-content');
-                        scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
-                    } else {
-                        document.getElementById("MessageDiv").appendChild(sender);
-                        document.getElementById("MessageDiv").appendChild(para);
-                        document.getElementById("MessageDiv").appendChild(time);
-                        let scroll_to_bottom = document.getElementById('chat-content');
-                        scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
+                        if (data.Messages[key].sender != "{{request.session.username}}") {
+                            para.style.backgroundColor = 'rgb(127, 127, 127)';
+                        }
+                    }
+                    if(scrollNeeded){
+                            let scroll_to_bottom = document.getElementById('chat-content');
+                            scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
+                            scrollNeeded=false
                     }
                 }
-            }
-        })
+            })
+        }, 300);
     }
 
-
+    function closeWindow() {
+        document.getElementById("card_chat").style.display = "none";
+        document.getElementById("doc").setAttribute("class", "col-md-8");
+        // document.getElementById("title").setAttribute("class", "d-none");
+        clearInterval(chatInterval);
+    }
 
     function sendMessage() {
         if (document.getElementById("Message").value == '?') {
@@ -235,10 +209,10 @@
         $.ajax({
             url: "/sendMessage/message=" + String(document.getElementById("Message").value),
             success: function (data) {
-                ViewMessage(data.message.vet, true, document.getElementById("Message").value)
-                document.getElementById("Message").value = ""
-                console.log("Data Of Send Messages : ")
-                console.log(data)
+                scrollNeeded = true;
+                document.getElementById("Message").value = "";
+                console.log("Data Of Sent Messages : ");
+                console.log(data);
             }
         })
     }

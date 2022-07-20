@@ -31,8 +31,6 @@ def logout(request):
 def viewMessages(request):
     user = Myuser.objects.get(username=request.session['username'])
     vet = Vet.objects.get(username=request.session['vet_username'])
-    # Message = Messages.objects.filter(
-    #     sender=user.username or vet.username, receiver=vet.username or user.username).values()
     Message = Messages.objects.filter(
         Q(sender=vet.username) | Q(sender=user.username), Q(receiver=vet.username) | Q(receiver=user.username)).values()
     print("-------------------------------------------")
@@ -40,16 +38,11 @@ def viewMessages(request):
     user_firstname = user.firstname
     vet_firstname = vet.firstname
     print(vet.firstname)
-    # for item in Message:
-    #     print(item.content)
     print("-------------------------------------------")
     return JsonResponse({"Messages": list(Message), "user_firstname": user_firstname, "vet_firstname": vet_firstname})
-    # Message = serializers.serialize('json', Message)
-    # json_response = {'Messages': {'Messages': Message}}
-    # return HttpResponse(json.dumps(json_response), content_type='application/json')
 
 
-def sendMessage(request, contents=""):
+def sendMessage(request, contents="", receiver=""):
     print("inside view ------------------------------------------------")
     user = Myuser.objects.get(username=request.session['username'])
     vet = Vet.objects.get(username=request.session['vet_username'])
