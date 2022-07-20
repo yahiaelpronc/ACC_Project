@@ -126,7 +126,7 @@ def getVetFirstName(request, vet_username):
     print("inside view ------------------------------------------------")
     vet = Vet.objects.get(username=vet_username)
     first_name = vet.firstname
-    request.session['vet_username'] = vet.username
+    request.session['vet_username'] = vet_username
     json_response = {'vet': {'firstname': first_name}}
     return HttpResponse(json.dumps(json_response), content_type='application/json')
 

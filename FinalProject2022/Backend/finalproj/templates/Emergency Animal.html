@@ -100,7 +100,7 @@
                         <div class="publisher bt-1 border-light">
                             <form action="">
                                 <input class="publisher-input" type="text" placeholder="Write something" id="Message">
-                                <a class="publisher-btn text-info" href="#" data-abc="true">
+                                <a class="publisher-btn text-info" data-abc="true">
                                     <i class="fa fa-paper-plane" onclick="sendMessage()"></i>
                                 </a>
                             </form>
@@ -145,6 +145,11 @@
         // document.getElementById("title").setAttribute("class", "d-none");
     }
 
+
+
+
+
+
     function ViewMessage(vet_username, add = false, newMessage = "") {
         $.ajax({
             url: "/getVetFirstName/" + vet_username,
@@ -161,6 +166,8 @@
                 console.log(data.Messages, typeof (data.Messages))
                 // UPDATE CHATBOX
                 if (add == false) {
+                    $('#MessageDivReverse').html('');
+                    $('#MessageDiv').html('');
                     for (const key in data.Messages) {
                         // console.log(`${key}: ${data.Messages[key].content}`);
                         const para = document.createElement("p");
@@ -169,7 +176,7 @@
                         month = data.Messages[key].date.split("-")[1]
                         day = data.Messages[key].date.split("-")[2]
                         day = day.split("T")[0]
-                        time.innerHTML = month+"/"+day;
+                        time.innerHTML = month + "/" + day;
                         time.classList.add("meta");
                         const sender = document.createElement("p");
                         sender.innerHTML = data.Messages[key].sender;
@@ -178,24 +185,51 @@
                             document.getElementById("MessageDivReverse").appendChild(sender);
                             document.getElementById("MessageDivReverse").appendChild(para);
                             document.getElementById("MessageDivReverse").appendChild(time);
+                            let scroll_to_bottom = document.getElementById('chat-content');
+                            scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
                         } else {
                             document.getElementById("MessageDiv").appendChild(sender);
                             document.getElementById("MessageDiv").appendChild(para);
                             document.getElementById("MessageDiv").appendChild(time);
+                            let scroll_to_bottom = document.getElementById('chat-content');
+                            scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
                         }
                     }
                 } else {
+                    last = data.Messages[Object.keys(data.Messages)[Object.keys(data.Messages).length - 1]]
                     const para = document.createElement("p");
                     para.innerHTML = newMessage;
-                    document.getElementById("MessageDivReverse").appendChild(para);
+                    const time = document.createElement("p");
+                    month = last.date.split("-")[1]
+                    day = last.date.split("-")[2]
+                    day = day.split("T")[0]
+                    time.innerHTML = month + "/" + day;
+                    time.classList.add("meta");
+                    const sender = document.createElement("p");
+                    sender.innerHTML = last.sender;
+                    sender.classList.add("meta");
+                    if (last.sender == "{{request.session.username}}") {
+                        document.getElementById("MessageDivReverse").appendChild(sender);
+                        document.getElementById("MessageDivReverse").appendChild(para);
+                        document.getElementById("MessageDivReverse").appendChild(time);
+                        let scroll_to_bottom = document.getElementById('chat-content');
+                        scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
+                    } else {
+                        document.getElementById("MessageDiv").appendChild(sender);
+                        document.getElementById("MessageDiv").appendChild(para);
+                        document.getElementById("MessageDiv").appendChild(time);
+                        let scroll_to_bottom = document.getElementById('chat-content');
+                        scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
+                    }
                 }
             }
         })
     }
 
 
+
     function sendMessage() {
-        if (document.getElementById("Message").value == '?'){
+        if (document.getElementById("Message").value == '?') {
             document.getElementById("Message").value = '؟'
         }
         $.ajax({
