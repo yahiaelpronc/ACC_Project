@@ -436,8 +436,7 @@ def login(request):
         return render(request, 'login.html')
     myuser = Myuser.objects.filter(
         username=request.POST['username'], password=request.POST['password'])
-    myvet = Vet.objects.filter(
-        username=request.POST['username'], password=request.POST['password'])
+
 
     if(len(myuser) != 0):
         myuser1 = Myuser.objects.get(username=request.POST['username'])
@@ -448,17 +447,26 @@ def login(request):
             request.session['firstname'] = myuser1.firstname
             request.session['pic_url'] = myuser1.profile_pic.url
             return render(request, 'home.html')
-    if(len(myvet) != 0):
-        myvet1 = Vet.objects.get(username=request.POST['username'])
-        if(myvet1.active_status == False):
-            return render(request, 'notVerified.html')
-        else:
-            request.session['username'] = request.POST['username']
-            return render(request, 'home.html')
-    context = {}
-    context['notfound'] = 'this username and password are not correct'
-    return render(request, 'login.html', context)
 
+
+
+def loginVet(request):
+    if(request.method == 'GET'):
+        return render(request,'login.html')
+    else:
+        myvet=Vet.objects.filter(username=request.POST['username'],password=request.POST['password'])
+        if(len(myvet) != 0):
+            vet1=Vet.objects.get(username=request.POST['username'],password=request.POST['password'])
+            if(vet1.active_status):
+                request.session['vet_username']=request.POST['username']
+                return render(request,'home.html')
+            else:
+                return render(request, 'notVerified.html')
+        else:
+            context = {}
+            context['notfound'] = 'this username and password are not correct'
+            return render(request, 'login.html', context)
 
 def test(request):
     return render(request, 'Admin.html')
+
