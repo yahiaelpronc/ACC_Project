@@ -2,11 +2,7 @@
 <html lang="en">
 
 
-<!-- NOT READY FOR Backend Developing
-
-NOT READY FOR Backend Developing
-
-NOT READY FOR Backend Developing -->
+<!-- NOT READY FOR Backend Developing -->
 
 <head>
     <meta charset="UTF-8">
@@ -19,7 +15,7 @@ NOT READY FOR Backend Developing -->
     <!-- <link rel="stylesheet" href="static\css\bootstrap.min.css.map" /> -->
     <link rel="stylesheet" href="static\css\normalize.css" />
     <link rel="stylesheet" href="static/css/prescriptionMedication.css" />
-    <link rel="stylesheet" href="static/css/Style.scss" />
+    <!-- <link rel="stylesheet" href="static/css/Style.scss" /> -->
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -40,7 +36,7 @@ NOT READY FOR Backend Developing -->
 
         <!-- Main Section for  prescription items is Selected  -->
 
-        <div class="chosenlabels col-md-5 col-sm-4">
+        <div class="chosenlabels col-md-4 col-sm-5">
             <h2 class="main-title">Prescription Labels</h2>
             <form action="">
                 <div class="wrapper">
@@ -103,10 +99,47 @@ NOT READY FOR Backend Developing -->
 
                     <div class="labelcard">
                         interval
-                        <label for="customRange3" class="form-label">Dosing Interval</label>
-                        <input type="range" class="form-range" min="0" max="24" step="1" id="customRange3">
+                        <div class="input-group">
+                            <label for="duration" class="form-label">Dosing Interval every x hrs for x days</label>
+                            <input type="text" class="form-control" id="duration"
+                                aria-label="amount (with dot and two decimal places)">
+                            <span class="input-group-text">Hrs</span>
+                            <input type="text" class="form-control"
+                                aria-label="amount (with dot and two decimal places)">
+                            <span class="input-group-text">Days</span>
+                        </div>
+
+
+                        <!-- <label for="customRange3" class="form-label">Dosing Interval</label>
+                        <input type="range" class="form-range" min="0" max="24" step="1" id="customRange3"> -->
                     </div>
-                    <div class="labelcard">Adminstration Route</div>
+
+                    <!-- Fifth choice -->
+
+                    <div class="labelcard">
+                        Adminstration Route
+                        <div class="dropdown">
+                            <label class="form-label">Adminstration Route</label>
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                More...
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">orally</a></li>
+                                <li><a class="dropdown-item" href="#">sublingual</a></li>
+                                <li><a class="dropdown-item" href="#">ocullar</a></li>
+                                <li><a class="dropdown-item" href="#">Intramascular</a></li>
+                                <li><a class="dropdown-item" href="#">Subcutaneous</a></li>
+                                <li><a class="dropdown-item" href="#">Intravenous</a></li>
+                                <li><a class="dropdown-item" href="#">Rectal Route</a></li>
+                                <li><a class="dropdown-item" href="#">Vaginal Route</a></li>
+                                <li><a class="dropdown-item" href="#">inhalation Route</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Sexth choice -->
+
                     <div class="labelcard">Prescription medication enter the selected item</div>
                 </div>
             </form>
@@ -114,7 +147,7 @@ NOT READY FOR Backend Developing -->
 
         <!-- Section which Prescription appear -->
 
-        <div class="result col-md-7 col-sm-8">
+        <div class="result col-md-8 col-sm-7">
             <h2 class="main-title">Prescription Medication</h2>
         </div>
     </div>
