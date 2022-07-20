@@ -23,9 +23,15 @@
     <div class="container">
       <a href="/" class="logo">ACC</a>
       <ul class="main-nav">
+        {% if request.session.username == None %}
         <li><a href="/emergency/">Emergency Service</a></li>
         <li><a href="/login/">Login</a></li>
         <li><a href="/register/">Register</a></li>
+        {% else %}
+        <li><a href="/emergency/">Emergency Service</a></li>
+        <li><a href="#">Hello , {{request.session.username}} </a></li>
+        <li><a href="/logout/">Logout</a></li>
+        {% endif %}
         <li>
           <a href="#">Other Links</a>
           <!-- Start Megamenu -->

@@ -63,4 +63,4 @@ class Messages(models.Model):
     content = models.CharField(max_length=300, null=False)
     sender = models.CharField(max_length=30, null=False)
     receiver = models.CharField(max_length=30, null=False)
-    date = models.DateField(default=now.strftime("%d/%m/%Y %H:%M:%S"))
+    date = models.DateTimeField(default=datetime.now())

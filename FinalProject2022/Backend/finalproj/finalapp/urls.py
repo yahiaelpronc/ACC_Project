@@ -21,16 +21,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('addlocation/',addlocation),
-    path('listlocations/',listlocations),
-    path('locationdetails/<int:id>/',locationDetails),
+    path('logout/', logout),
+    path('viewMessages/', viewMessages),
+    path('sendMessage/message=<str:contents>', sendMessage),
+    path('addlocation/', addlocation),
+    path('listlocations/', listlocations),
+    path('locationdetails/<int:id>/', locationDetails),
     path('', home),
     path('register/', registerUser),
     path('registervet/', registervet),
-    path('verify/<str:username>/<dates>/',verifyUser),
-    path('verifyVet/<str:username>/<dates>/',verifyVet),
-    path('test/',test),
-    path('login/',login),
+    path('verify/<str:username>/<dates>/', verifyUser),
+    path('verifyVet/<str:username>/<dates>/', verifyVet),
+    path('test/', test),
+    path('login/', login),
 
     path('verify/<str:username>/<dates>/', verifyUser),
     path('verifyVet/<str:username>/<dates>/', verifyVet),

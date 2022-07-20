@@ -74,34 +74,16 @@
                             <button type="button" class="btn-close" aria-label="Close" onclick="closeWindow()">
                             </button>
                         </div>
-
-
                         <div class="ps-container ps-theme-default ps-active-y" id="chat-content"
                             style="overflow-y: scroll !important; height:400px !important;">
                             <div class="media media-chat">
-                                <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png"
-                                    alt="...">
-                                <div class="media-body">
-                                    <p>Hi</p>
-                                    <p>How are you ...???</p>
-                                    <p>What are you doing tomorrow?<br> Can we come up a bar?</p>
-                                    <p class="meta"><time datetime="2018">23:58</time></p>
+                                <div class="media-body" id="MessageDiv">
                                 </div>
                             </div>
-
-                            <div class="media media-meta-day">Today</div>
-
                             <div class="media media-chat media-chat-reverse">
-                                <div class="media-body">
-                                    <p>Hiii, I'm good.</p>
-                                    <p>How are you doing?</p>
-                                    <p>Long time no see! Tomorrow office. will be free on sunday.</p>
-                                    <p class="meta"><time datetime="2018">00:06</time></p>
+                                <div class="media-body" id="MessageDivReverse">
                                 </div>
                             </div>
-
-
-
                             <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
                                 <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
                             </div>
@@ -109,17 +91,14 @@
                                 <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
                             </div>
                         </div>
-
                         <div class="publisher bt-1 border-light">
-                            <img class="avatar avatar-xs"
-                                src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
                             <form action="">
-                                <input class="publisher-input" type="text" placeholder="Write something">
+                                <input class="publisher-input" type="text" placeholder="Write something" id="Message">
+                                <a class="publisher-btn text-info" href="#" data-abc="true">
+                                    <i class="fa fa-paper-plane" onclick="sendMessage()"></i>
+                                </a>
                             </form>
-                            <a class="publisher-btn text-info" href="/sendMessage" data-abc="true"><i
-                                    class="fa fa-paper-plane"></i></a>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -136,6 +115,17 @@
 
 
 <script>
+    var input = document.getElementById("Message");
+    input.addEventListener("keypress", function (event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            sendMessage()
+        }
+    });
+
     function myFunction(vet) {
         document.getElementById("card_chat").style.display = "block";
         document.getElementById("doc").setAttribute("class", "col-md-4");
@@ -149,14 +139,66 @@
         // document.getElementById("title").setAttribute("class", "d-none");
     }
 
-    function ViewMessage(vet_username) {
-        console.log("button clicked");
-        console.log("vet_username : "+vet_username);
+    function ViewMessage(vet_username, add = false, newMessage = "") {
         $.ajax({
-            url: "/getVetFirstName/"+vet_username,
+            url: "/getVetFirstName/" + vet_username,
             success: function (data) {
-                console.log("Vet First Name : "+data.vet.firstname);
+                console.log("Vet First Name : " + data.vet.firstname);
                 document.getElementById("receiver-name").innerHTML = data.vet.firstname;
+            }
+        })
+        // GET MESSAGES
+        $.ajax({
+            url: "/viewMessages/",
+            success: function (data) {
+                console.log("Data Of View Messages : ")
+                console.log(data.Messages, typeof (data.Messages))
+                // UPDATE CHATBOX
+                if (add == false) {
+                    for (const key in data.Messages) {
+                        // console.log(`${key}: ${data.Messages[key].content}`);
+                        const para = document.createElement("p");
+                        para.innerHTML = data.Messages[key].content;
+                        const time = document.createElement("p");
+                        month = data.Messages[key].date.split("-")[1]
+                        day = data.Messages[key].date.split("-")[2]
+                        day = day.split("T")[0]
+                        time.innerHTML = month+"/"+day;
+                        time.classList.add("meta");
+                        const sender = document.createElement("p");
+                        sender.innerHTML = data.Messages[key].sender;
+                        sender.classList.add("meta");
+                        if (data.Messages[key].sender == "{{request.session.username}}") {
+                            document.getElementById("MessageDivReverse").appendChild(sender);
+                            document.getElementById("MessageDivReverse").appendChild(para);
+                            document.getElementById("MessageDivReverse").appendChild(time);
+                        } else {
+                            document.getElementById("MessageDiv").appendChild(sender);
+                            document.getElementById("MessageDiv").appendChild(para);
+                            document.getElementById("MessageDiv").appendChild(time);
+                        }
+                    }
+                } else {
+                    const para = document.createElement("p");
+                    para.innerHTML = newMessage;
+                    document.getElementById("MessageDivReverse").appendChild(para);
+                }
+            }
+        })
+    }
+
+
+    function sendMessage() {
+        if (document.getElementById("Message").value == '?'){
+            document.getElementById("Message").value = '؟'
+        }
+        $.ajax({
+            url: "/sendMessage/message=" + String(document.getElementById("Message").value),
+            success: function (data) {
+                ViewMessage(data.message.vet, true, document.getElementById("Message").value)
+                document.getElementById("Message").value = ""
+                console.log("Data Of Send Messages : ")
+                console.log(data)
             }
         })
     }
