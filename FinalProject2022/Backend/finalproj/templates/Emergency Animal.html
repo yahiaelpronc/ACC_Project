@@ -45,8 +45,14 @@
                             <span class="title">Specialization : {{vet.specialization}}</span>
                             <p>Phone : {{vet.mobile}}</p>
                             <div class="mt-2">
+                                {% if request.session.username == None %}
+                                <button type="button" class="btn btn-success" id="{{vet.username}}">
+                                    <a style="color:white;text-decoration:none" href="/login/">Login To Chat</a>
+                                </button>
+                                {% else %}
                                 <button type="button" class="btn btn-primary" id="{{vet.username}}"
                                     onclick="myFunction(this.id)">chat</button>
+                                {% endif %}
                             </div>
                         </div>
                         {% endfor %}
