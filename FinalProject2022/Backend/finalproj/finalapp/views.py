@@ -27,6 +27,15 @@ def addAnimal(request):
     if(request.method == 'GET'):
         return render(request, 'addAnimal.html')
     else:
+        context = {}
+        # Backend Validation
+        if(len(request.POST['animalName']) < 3 or len(request.POST['animalName']) > 30):
+            context['errAnimalName'] = 'This name is not valid , Please Try Again'
+            return render(request, 'addAnimal.html', context)
+        if(Animal.objects.filter(animalName=request.POST['animalName']+"_"+request.session['username']).exists()):
+            context['errAnimalExists'] = 'An Animal Of Yours Is Already Registered With This Name , Please Try A Different Name'
+            return render(request, 'addAnimal.html', context)
+        # If Female Add female_state
         if(request.POST['gender'] == "f"):
             animal = Animal.objects.create(animalName=request.POST['animalName']+"_"+request.session['username'],
                                            ownerUsername=request.session['username'],
@@ -35,14 +44,15 @@ def addAnimal(request):
                                            female_state=request.POST['female_state'],
                                            species=request.POST['species'],
                                            b_date=request.POST['b_date'])
-        else:
-            animal = Animal.objects.create(animalName=request.POST['animalName']+"_"+request.session['username'],
-                                           ownerUsername=request.session['username'],
-                                           weight=request.POST['weight'],
-                                           gender=request.POST['gender'],
-                                           species=request.POST['species'],
-                                           b_date=request.POST['b_date'])
-        context = {}
+            context['success'] = "Your Animal Is Now Registered"
+            return render(request, 'addAnimal.html', context)
+        # If Male Do Not Add female_state
+        animal = Animal.objects.create(animalName=request.POST['animalName']+"_"+request.session['username'],
+                                       ownerUsername=request.session['username'],
+                                       weight=request.POST['weight'],
+                                       gender=request.POST['gender'],
+                                       species=request.POST['species'],
+                                       b_date=request.POST['b_date'])
         context['success'] = "Your Animal Is Now Registered"
         return render(request, 'addAnimal.html', context)
 
