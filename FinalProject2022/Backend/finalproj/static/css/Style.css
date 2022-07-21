@@ -147,48 +147,96 @@ ul {
 
 /* End Global Rules */
 
-.notification {
-  position: relative;
-  text-align: right;
-  background-color: #1877f2;
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+
+
+.icon {
+  cursor: pointer;
+  margin-right: 50px;
+  line-height: 60px;
+  width: fit-content;
+  margin: 35% auto;
 }
 
-.notification img {
-  padding: 10px 0;
+.icon i {
+  color: #2196f3;
 }
 
-.notification-menu {
+.icon span {
+  background: #f00;
+  padding: 7px;
+  border-radius: 50%;
+  color: #fff;
+  vertical-align: top;
+  margin-left: -25px
+}
+
+.icon img {
+  display: inline-block;
+  width: 26px;
+  margin-top: 4px
+}
+
+.icon:hover {
+  opacity: .7
+}
+
+
+
+.notifications {
+  max-width: 300px;
+  height: 0px;
+  opacity: 0;
   position: absolute;
-  top: 50px;
-  left: -150px;
-  background-color: #e5e5e5;
-  border: #989898;
-  padding: 10px;
-  list-style: none;
-  width: 250px;
-  display: none;
-  text-align: left;
-}
-
-.notification-menu li {
+  z-index: 2000;
+  top: 63px;
+  right: 62px;
+  border-radius: 5px 0px 5px 5px;
   background-color: #fff;
-  padding: 10px;
-  margin-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
-.notification-menu .avatar {
-  padding: 2px 0;
-}
-
-.notification-menu h3 {
-  font-size: 15px;
-  margin: 0 0 5px 0;
-  display: inline;
-}
-
-.notification-menu p {
-  margin-bottom: 0;
+.notifications h2 {
   font-size: 14px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  color: #999
+}
+
+.notifications h2 span {
+  color: #f00
+}
+
+.notifications-item {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  padding: 6px 9px;
+  margin-bottom: 0px;
+  cursor: pointer
+}
+
+.notifications-item:hover {
+  background-color: #eee
+}
+
+.notifications-item img {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-right: 9px;
+  border-radius: 50%;
+  margin-top: 2px
+}
+
+.notifications-item .text h4 {
+  color: #777;
+  font-size: 16px;
+  margin-top: 3px
+}
+
+.notifications-item .text p {
+  color: #aaa;
+  font-size: 12px
 }
 
 /* Start Header */

@@ -38,7 +38,7 @@
 
 <body>
   <!-- Start Header -->
-  <div class="header mb-3" id="header">
+  <div class="header" id="header">
     <div class="container">
       <a href="/" class="logo">ACC</a>
       <ul class="main-nav">
@@ -49,42 +49,58 @@
         {% else %}
         <li><a href="/emergency/">Emergency Service</a></li>
         <li><a href="#">Hello , {{request.session.username}} </a></li>
+        <li>
+          <div class="icon" id="bell"> <i class="fa-solid fa-bell fa-2x"></i> </div>
+          <div class="notifications" id="box">
+            <h2>Notifications - <span>2</span></h2>
+            <div class="notifications-item"> <img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
+              <div class="text">
+                <h4>Samso aliao</h4>
+                <p>Samso Nagaro Like your home work </p>
+              </div>
+            </div>
+            <div class="notifications-item"> <img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png"
+                alt="img">
+              <div class="text">
+                <h4>John Silvester</h4>
+                <p>+20 vista badge earned</p>
+              </div>
+            </div>
+          </div>
+        </li>
         <li><a href="/logout/">Logout</a></li>
         {% endif %}
         <li>
-          <a href="#">Other Links</a>
+          <a href="#">More Services</a>
           <!-- Start Megamenu -->
           <div class="mega-menu">
-            <div class="image">
-              <img src="imgs/megamenu.png" alt="" />
-            </div>
             <ul class="links">
+              {% if request.session.username == None %}
               <li>
-                <a href="#testimonials"><i class="far fa-comments fa-fw"></i> Meet Our Doctors</a>
+                <a href="/login/"><i class="far fa-comments fa-fw"></i>Add Location</a>
               </li>
               <li>
-                <a href="#team"><i class="far fa-user fa-fw"></i> Team Work Members</a>
+                <a href="/login/"><i class="far fa-comments fa-fw"></i>Add Animal</a>
+              </li>
+              {% else %}
+              <li>
+                <a href="/addlocation/"><i class="far fa-comments fa-fw"></i>Add Location</a>
               </li>
               <li>
-                <a href="#services"><i class="far fa-building fa-fw"></i> Services</a>
+                <a href="/addAnimal/"><i class="far fa-comments fa-fw"></i>Add Animal</a>
               </li>
-              <li>
-                <a href="#our-skills"><i class="far fa-check-circle fa-fw"></i> Our Skills</a>
-              </li>
-              <li>
-                <a href="#work-steps"><i class="far fa-clipboard fa-fw"></i> How It Works</a>
-              </li>
+              {% endif %}
             </ul>
             <ul class="links">
               <li>
-                <a href="#events"><i class="far fa-calendar-alt fa-fw"></i> Events</a>
+                <a href="#events"><i class="far fa-calendar-alt fa-fw"></i> Place Holder</a>
               </li>
-              <li>
+              <!-- <li>
                 <a href="#stats"><i class="far fa-chart-bar fa-fw"></i> Stats</a>
               </li>
               <li>
                 <a href="#discount"><i class="fas fa-percent fa-fw"></i> Request A Discount</a>
-              </li>
+              </li> -->
             </ul>
           </div>
           <!-- End Megamenu -->

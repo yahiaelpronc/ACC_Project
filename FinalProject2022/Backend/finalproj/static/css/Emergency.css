@@ -385,6 +385,7 @@ h4.card-title {
   -webkit-box-flex: initial;
   flex: initial;
   display: table;
+  margin-left: auto;
 }
 
 .media-body {
