@@ -1,13 +1,11 @@
 {%extends 'base.html'%}
 {%block content%}
 {%load static%}
-<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-<link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
+<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'all.min.css' %}" />
 <link rel="stylesheet" href="{% static 'css/Emergency.css' %}" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<div class="headers">
-    <h2 class="main-title">Emergency Animal</h2>
-</div>
+
 
 <!--Row with two equal columns-->
 
@@ -36,7 +34,6 @@
         <div class="demo-content bg-alt">
             <div class=" text-center m-auto col-md-4 col-sm-7 col-xs-12">
                 <div class="testimonials bg-transparent" id="testimonials">
-
                     <div class="container container1">
                         {% for vet in vets %}
                         <div class="box">
