@@ -18,6 +18,53 @@
   <link rel="preconnect" href=" {%static 'https://fonts.gstatic.com'%}" crossorigin />
   <link href="{%static 'https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap'%} "
     rel="stylesheet" />
+    <style>
+      
+.notification {
+  position: relative;
+  text-align: right;
+  background-color: #1877f2;
+}
+
+.notification img {
+  padding: 10px 0;
+}
+
+.notification-menu {
+  position: absolute;
+  top: 50px;
+  left: -150px;
+  background-color: #e5e5e5;
+  border: #989898;
+  padding: 10px;
+  list-style: none;
+  width: 250px;
+  display: none;
+  text-align: left;
+}
+
+.notification-menu li {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.notification-menu .avatar {
+  padding: 2px 0;
+}
+
+.notification-menu h3 {
+  font-size: 15px;
+  margin: 0 0 5px 0;
+  display: inline;
+}
+
+.notification-menu p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+    </style>
 </head>
 
 <body>
@@ -55,6 +102,23 @@
           </div>
         </li>
         <li><a href="/logout/">Logout</a></li>
+        <li>
+          <div class="notification" onclick="test()">
+            <img class src="https://s3.amazonaws.com/codecademy-content/projects/2/feedster/bell.svg">
+            <ul class="notification-menu">
+              <li>
+                <img class="avatar" src="https://s3.amazonaws.com/codecademy-content/projects/2/feedster/wr2.svg">
+                <h3>William Roberts II</h3>
+                <p>Clean as a whistle</p>
+              </li>
+              <li>
+                <img class="avatar" src="https://s3.amazonaws.com/codecademy-content/projects/2/feedster/fn.svg">
+                <h3>Faheem Najm</h3>
+                <p>All I do is win</p>
+              </li>
+            </ul>
+          </div>
+        </li>
         {% endif %}
         <li>
           <a href="#">More Services</a>
@@ -799,7 +863,45 @@
   </div>
   <!-- End Footer -->
 
+<<<<<<< HEAD
   <script src=" https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+=======
+
+
+
+    function test(){
+      alert("Hello")
+    }
+    const ShowDropdown = () => {
+      notifyButton.classList.add("active");
+      notifyArea.style.visibility = "visible";
+    }
+
+    const HideDropdown = () => {
+      notifyButton.classList.remove("active");
+      notifyArea.style.visibility = "hidden";
+    }
+
+    function ToggleNotifyDropdown(event) {
+      var isInside = notifyButton.contains(event.target) || notifyArea.contains(event.target);
+
+      return isInside ? ShowDropdown() : HideDropdown();
+    }
+
+    document.addEventListener("click", ToggleNotifyDropdown);
+
+
+    var main = function () {
+      $('.notification img').click(function () {
+        $('.notification-menu').toggle();
+      });
+
+      $('.post .btn').click(function () {
+        $(this).toggleClass('btn-like');
+      });
+    };
+    $(document).ready(main);
+>>>>>>> 6474e54db4d9b2ac29d43dcaaab25386621dfc76
   </script>
   <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src=" {%static 'js/main.js'%}"></script>
