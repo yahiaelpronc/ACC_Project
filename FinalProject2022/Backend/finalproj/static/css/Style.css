@@ -32,7 +32,6 @@ ul {
   padding: 0;
 }
 
-
 .container {
   padding-left: 15px;
   padding-right: 15px;
@@ -147,6 +146,51 @@ ul {
 }
 
 /* End Global Rules */
+
+.notification {
+  position: relative;
+  text-align: right;
+  background-color: #1877f2;
+}
+
+.notification img {
+  padding: 10px 0;
+}
+
+.notification-menu {
+  position: absolute;
+  top: 50px;
+  left: -150px;
+  background-color: #e5e5e5;
+  border: #989898;
+  padding: 10px;
+  list-style: none;
+  width: 250px;
+  display: none;
+  text-align: left;
+}
+
+.notification-menu li {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.notification-menu .avatar {
+  padding: 2px 0;
+}
+
+.notification-menu h3 {
+  font-size: 15px;
+  margin: 0 0 5px 0;
+  display: inline;
+}
+
+.notification-menu p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
 /* Start Header */
 .header {
   background-color: white;
@@ -238,6 +282,7 @@ ul {
 .header .main-nav>li>a:hover::before {
   left: 0;
 }
+
 
 .header .mega-menu {
   position: absolute;
@@ -1667,4 +1712,3 @@ ul {
 }
 
 /* End Animation */
-
