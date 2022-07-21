@@ -14,7 +14,8 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href=" {%static 'https://fonts.googleapis.com'%}" />
   <link rel="preconnect" href="{%static 'https://fonts.gstatic.com'%}" crossorigin />
-  <link href="{%static 'https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap'%} " rel="stylesheet" />
+  <link href="{%static 'https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap'%} "
+    rel="stylesheet" />
 </head>
 
 <body>
@@ -33,39 +34,36 @@
         <li><a href="/logout/">Logout</a></li>
         {% endif %}
         <li>
-          <a href="#">Other Links</a>
+          <a href="#">More Services</a>
           <!-- Start Megamenu -->
           <div class="mega-menu">
-            <div class="image">
-              <img src="imgs/megamenu.png" alt="" />
-            </div>
             <ul class="links">
+              {% if request.session.username == None %}
               <li>
-                <a href="#testimonials"><i class="far fa-comments fa-fw"></i> Meet Our Doctors</a>
+                <a href="/login/"><i class="far fa-comments fa-fw"></i>Add Location</a>
               </li>
               <li>
-                <a href="#team"><i class="far fa-user fa-fw"></i> Team Work Members</a>
+                <a href="/login/"><i class="far fa-comments fa-fw"></i>Add Animal</a>
+              </li>
+              {% else %}
+              <li>
+                <a href="/addlocation/"><i class="far fa-comments fa-fw"></i>Add Location</a>
               </li>
               <li>
-                <a href="#services"><i class="far fa-building fa-fw"></i> Services</a>
+                <a href="/addAnimal/"><i class="far fa-comments fa-fw"></i>Add Animal</a>
               </li>
-              <li>
-                <a href="#our-skills"><i class="far fa-check-circle fa-fw"></i> Our Skills</a>
-              </li>
-              <li>
-                <a href="#work-steps"><i class="far fa-clipboard fa-fw"></i> How It Works</a>
-              </li>
+              {% endif %}
             </ul>
             <ul class="links">
               <li>
-                <a href="#events"><i class="far fa-calendar-alt fa-fw"></i> Events</a>
+                <a href="#events"><i class="far fa-calendar-alt fa-fw"></i> Place Holder</a>
               </li>
-              <li>
+              <!-- <li>
                 <a href="#stats"><i class="far fa-chart-bar fa-fw"></i> Stats</a>
               </li>
               <li>
                 <a href="#discount"><i class="fas fa-percent fa-fw"></i> Request A Discount</a>
-              </li>
+              </li> -->
             </ul>
           </div>
           <!-- End Megamenu -->
@@ -83,7 +81,7 @@
         <p>Here Iam gonna share everything about my life. Books Iam reading, Games Iam Playing, Stories and Events</p>
       </div>
       <div class="image">
-        <img src="{%static 'imgs/animal walfare.jpg'%} " alt="" style="max-width:80%;height:auto"/>
+        <img src="{%static 'imgs/animal walfare.jpg'%} " alt="" style="max-width:80%;height:auto" />
       </div>
     </div>
     <a href="#articles" class="go-down">

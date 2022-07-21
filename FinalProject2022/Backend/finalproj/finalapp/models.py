@@ -64,3 +64,17 @@ class Messages(models.Model):
     sender = models.CharField(max_length=30, null=False)
     receiver = models.CharField(max_length=30, null=False)
     date = models.DateTimeField(default=datetime.now())
+
+
+class Animal(models.Model):
+    animalName = models.CharField(unique=True, max_length=30, null=False)
+    ownerUsername = models.CharField(max_length=30, null=False)
+    weight = models.IntegerField(null=False)
+    b_date = models.DateField(max_length=20, null=False)
+    gender = models.CharField(
+        max_length=30, null=False, choices=(('m', 'm'), ('f', 'f')))
+    species = models.CharField(
+        max_length=30, null=False, choices=(('domestic', 'domestic'), ('wild', 'wild')))
+    female_state = models.CharField(
+        max_length=30, null=True, blank=True, choices=(
+            ('immature', 'immature'), ('mature&married', 'mature&married'), ('pregnant ', 'pregnant'), ('lactating', 'lactating')))

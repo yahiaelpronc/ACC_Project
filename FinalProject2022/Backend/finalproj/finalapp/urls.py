@@ -21,6 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('addAnimal/', addAnimal),
     path('logout/', logout),
     path('viewMessages/', viewMessages),
     path('sendMessage/message=<str:contents>', sendMessage),
