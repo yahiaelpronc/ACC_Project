@@ -33,16 +33,12 @@ def viewMessages(request):
     vet = Vet.objects.get(username=request.session['vet_username'])
     Message = Messages.objects.filter(
         Q(sender=vet.username) | Q(sender=user.username), Q(receiver=vet.username) | Q(receiver=user.username)).values()
-    print("-------------------------------------------")
-    print(user.firstname)
     user_firstname = user.firstname
     vet_firstname = vet.firstname
-    print(vet.firstname)
-    print("-------------------------------------------")
     return JsonResponse({"Messages": list(Message), "user_firstname": user_firstname, "vet_firstname": vet_firstname})
 
 
-def sendMessage(request, contents="", receiver=""):
+def sendMessage(request, contents=""):
     print("inside view ------------------------------------------------")
     user = Myuser.objects.get(username=request.session['username'])
     vet = Vet.objects.get(username=request.session['vet_username'])

@@ -148,6 +148,9 @@
 var scrollNeeded = true;
 
     function ViewMessage(vet_username) {
+
+
+
         $.ajax({
             url: "/getVetFirstName/" + vet_username,
             success: function (data) {
@@ -155,25 +158,33 @@ var scrollNeeded = true;
                 document.getElementById("receiver-name").innerHTML = data.vet.firstname;
             }
         })
+
+
+
+
+
+
+
+
         chatInterval = setInterval(function () {
             // GET MESSAGES
             $.ajax({
                 url: "/viewMessages/",
                 success: function (data) {
-                    console.log("Data Of View Messages : ")
-                    console.log(data.Messages, typeof (data.Messages))
                     // UPDATE CHATBOX
                     $('#MessageDivReverse').html('');
-                    $('#MessageDiv').html('');
                     for (const key in data.Messages) {
-                        console.log(`${key}: ${data.Messages[key].content}`);
+                        // console.log(`${key}: ${data.Messages[key].content}`);
+                        // Message Element
                         const para = document.createElement("p");
                         para.innerHTML = data.Messages[key].content;
+                        // Time Element
                         const time = document.createElement("p");
                         month = data.Messages[key].date.split("-")[1]
                         day = data.Messages[key].date.split("-")[2]
                         day = day.split("T")[0]
                         time.innerHTML = month + "/" + day;
+                        // Sender Element
                         const sender = document.createElement("p");
                         sender.innerHTML = data.Messages[key].sender;
                         time.classList.add("meta");
@@ -202,12 +213,24 @@ var scrollNeeded = true;
         clearInterval(chatInterval);
     }
 
+
+
+
     function sendMessage() {
-        if (document.getElementById("Message").value == '?') {
-            document.getElementById("Message").value = '؟'
+        var inputArr=[]
+        let i =0
+        for(char of document.getElementById("Message").value){
+            if(char == "?"){
+                char = '؟'
+                inputArr[i]=char
+            }else{
+                inputArr[i]=char
+            }
+            i = i +1
         }
+        var messageOfArr = inputArr.join("");
         $.ajax({
-            url: "/sendMessage/message=" + String(document.getElementById("Message").value),
+            url: "/sendMessage/message=" + messageOfArr,
             success: function (data) {
                 scrollNeeded = true;
                 document.getElementById("Message").value = "";
