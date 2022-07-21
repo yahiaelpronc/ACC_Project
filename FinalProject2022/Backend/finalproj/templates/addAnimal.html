@@ -6,92 +6,156 @@ Register Your Animal
 {%load static%}
 <link rel="stylesheet" href=" {% static 'Registration.css' %}">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-crossorigin="anonymous"></script>
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-crossorigin="anonymous"></script>
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+</script>
 <script src="https://kit.fontawesome.com/b5c82d464c.js" crossorigin="anonymous"></script>
-    <div class="container container1">
+<div class="container container1">
 
-        <div class="title">Register Your Animal</div>
-        <form action="/addAnimal/" method="post" id="myform" enctype="multipart/form-data">
-            {% csrf_token %}
+    <div class="title">Register Your Animal</div>
+    <form action="/addAnimal/" method="post" id="myform" enctype="multipart/form-data">
+        {% csrf_token %}
 
-            <div class="user-details">
+        <div class="user-details">
 
-                <div class="input-box">
-                    <span class="details">Animal Name *</span>
-                    <input type="text" placeholder="Enter Your Animal's Name" name="animalName" >
-                    <!-- <span class="text-danger">{{errusername}}</span> -->
-
-                </div>
-
-
-                <div class="input-box">
-                    <span class="details">Weight *</span>
-                    <input type="text" placeholder="Enter Your Animal's Weight" id="name" name="weight">
-                    <p id="nameerr"></p>
-                    <!-- <span class="text-danger">{{errfirstname}}</span> -->
-                </div>
-
-
-                <div class="mb-3 input-box">
-                    <label for="bdate" class="form-label label1">Animal's Birth Date</label>
-                    <input type="date" class="form-control" id="bdate" aria-describedby="emailHelp"
-                        placeholder=" Birth Date" name="b_date">
-                </div>
-
-                <div class="mb-3 input-box">
-                    <select onchange="isFemale(this.value)" name="gender" class="form-select my-4 p-2" aria-label="Default select example">
-                        <option selected>Gender</option>
-                        <option value="m">Male</option>
-                        <option value="f">Female</option>
-                    </select>
-                </div>
-
-
-
-                <div class="mb-3 input-box">
-                    <select name="species" class="form-select my-4 p-2" aria-label="Default select example">
-                        <option selected>species</option>
-                        <option value="obstetrics and gynecology">obstetrics and gynecology</option>
-                        <option value="poultry">poultry</option>
-                        <option value="equine">equine</option>
-                        <option value="ruminant">ruminant</option>
-                        <option value="fishes and aquatics">fishes and aquatics</option>
-                    </select>
-                </div>
-
-                <div class="mb-3 input-box" id="femaleStateDiv" style="display:none">
-                    <select name="female_state" class="form-select my-4 p-2" aria-label="Default select example">
-                        <option selected>Female State</option>
-                        <option value="immature">Immature</option>
-                        <option value="mature&married">Mature & Married</option>
-                        <option value="pregnant">pregnant</option>
-                        <option value="lactating">lactating</option>
-                    </select>
-                </div>
+            <div class="input-box">
+                <span class="details">Animal Name *</span>
+                <input type="text" placeholder="Enter Your Animal's Name" name="animalName" onchange="checkName(this)" required>
+                <p id="AnimalNameErr"></p>
+                <span class="text-danger">{{errAnimalName}}</span>
 
             </div>
-                <h5 id="success" style="background-color : rgba(0, 167, 0, 0.534);color:white;width:fit-content;border-radius:20px;padding:10px">
-                    {{success}} </h5>
-            <div class="button">
-                <input type="submit" value="Register Animal"     id="submitbtn">
+
+
+            <div class="input-box">
+                <span class="details">Weight *</span>
+                <input type="number" placeholder="Enter Your Animal's Weight" id="name" name="weight" required>
             </div>
 
 
-            <p id="submiterror"></p>
-        </form>
-    </div>
+            <div class="mb-3 input-box">
+                <label for="bdate" class="form-label label1">Animal's Birth Date</label>
+                <input type="date" class="form-control" id="bdate" aria-describedby="emailHelp"
+                    placeholder=" Birth Date" name="b_date" required onchange="checkDate(this)">
+                <p id="dateErr"></p>
+            </div>
 
-    <script>
-        function isFemale(gender){
-            if(gender == "f"){
-                document.getElementById("femaleStateDiv").style.display="block";
-            }else{
-                document.getElementById("femaleStateDiv").style.display="none";
-            }
+            <div class="mb-3 input-box">
+                <select onchange="isFemale(this.value)" name="gender" class="form-select my-4 p-2"
+                    aria-label="Default select example" required>
+                    <option value="">Gender</option>
+                    <option value="m">Male</option>
+                    <option value="f">Female</option>
+                </select>
+            </div>
+
+
+
+            <div class="mb-3 input-box">
+                <select name="species" class="form-select my-4 p-2" aria-label="Default select example" required>
+                    <option value="">Species</option>
+                    <option value="obstetrics and gynecology">obstetrics and gynecology</option>
+                    <option value="poultry">poultry</option>
+                    <option value="equine">equine</option>
+                    <option value="ruminant">ruminant</option>
+                    <option value="fishes and aquatics">fishes and aquatics</option>
+                </select>
+            </div>
+
+            <div class="mb-3 input-box" id="femaleStateDiv" style="display:none">
+                <select name="female_state" id="female_state" class="form-select my-4 p-2" aria-label="Default select example">
+                    <option value="">Female State</option>
+                    <option value="immature">Immature</option>
+                    <option value="mature&married">Mature & Married</option>
+                    <option value="pregnant">pregnant</option>
+                    <option value="lactating">lactating</option>
+                </select>
+            </div>
+
+        </div>
+        <h5 id="success"
+            style="background-color : rgba(0, 167, 0, 0.534);color:white;width:fit-content;border-radius:20px;padding:10px">
+            {{success}} </h5>
+        <span class="text-danger">{{errAnimalExists}}</span>
+                <div class="button">
+            <input type="submit" value="Register Animal" id="submitbtn">
+        </div>
+
+
+        <p id="submiterror"></p>
+    </form>
+</div>
+
+<script>
+    // FIELDS
+    var animalName = document.getElementById("animalName")
+    var weight = document.getElementById("weight")
+    var gender = document.getElementById("gender")
+    var female_state = document.getElementById("female_state")
+    var species = document.getElementById("species")
+    var b_date = document.getElementById("b_date")
+    var submitbtn = document.getElementById("submitbtn")
+
+
+    // ERRORS
+    var animalNameErr = document.getElementById("AnimalNameErr")
+    var weightErr = document.getElementById("weightErr")
+    var dateErr = document.getElementById("dateErr")
+
+function checkName(e){
+    if(e.value.length < 3 || e.value.length > 30){
+        e.style.color = "red"
+        animalNameErr.style.display = "block"
+        animalNameErr.style.color = "red"
+        animalNameErr.innerText = "Name Has To be Between 3 and 30 Characters"
+        submitbtn.disabled = true
+        submitbtn.style.opacity = ".5"
+    }else{
+        e.style.color = "black"
+        animalNameErr.style.display = "none"
+        animalNameErr.innerText = ""
+        submitbtn.disabled = false
+        submitbtn.style.opacity = "1"
+    }
+}
+
+
+
+function checkDate(e){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + "-"+ mm + '-' + dd;
+    if(e.value > today)
+    {
+        e.style.color = "red"
+        dateErr.style.display = "block"
+        dateErr.style.color = "red"
+        dateErr.innerText = "Please Enter A Valid Birth Date"
+        submitbtn.disabled = true
+        submitbtn.style.opacity = ".5"
+    }else{
+        e.style.color = "black"
+        dateErr.style.display = "none"
+        dateErr.innerText = ""
+        submitbtn.disabled = false
+        submitbtn.style.opacity = "1"
+    }
+}
+
+
+
+    function isFemale(gender) {
+        if (gender == "f") {
+            document.getElementById("femaleStateDiv").style.display = "block";
+            document.getElementById("female_state").required = true;
+        } else {
+            document.getElementById("femaleStateDiv").style.display = "none";
+            document.getElementById("female_state").required = false;
         }
-    </script>
+    }
+</script>
 {%endblock%}
