@@ -52,36 +52,39 @@
         <li><a href="/logout/">Logout</a></li>
         {% endif %}
         <li>
-          <a href="#">More Services</a>
+          <a href="#">Other Links</a>
           <!-- Start Megamenu -->
           <div class="mega-menu">
+            <div class="image">
+              <img src="imgs/megamenu.png" alt="" />
+            </div>
             <ul class="links">
-              {% if request.session.username == None %}
               <li>
-                <a href="/login/"><i class="far fa-comments fa-fw"></i>Add Location</a>
+                <a href="#testimonials"><i class="far fa-comments fa-fw"></i> Meet Our Doctors</a>
               </li>
               <li>
-                <a href="/login/"><i class="far fa-comments fa-fw"></i>Add Animal</a>
-              </li>
-              {% else %}
-              <li>
-                <a href="/addlocation/"><i class="far fa-comments fa-fw"></i>Add Location</a>
+                <a href="#team"><i class="far fa-user fa-fw"></i> Team Work Members</a>
               </li>
               <li>
-                <a href="/addAnimal/"><i class="far fa-comments fa-fw"></i>Add Animal</a>
+                <a href="#services"><i class="far fa-building fa-fw"></i> Services</a>
               </li>
-              {% endif %}
+              <li>
+                <a href="#our-skills"><i class="far fa-check-circle fa-fw"></i> Our Skills</a>
+              </li>
+              <li>
+                <a href="#work-steps"><i class="far fa-clipboard fa-fw"></i> How It Works</a>
+              </li>
             </ul>
             <ul class="links">
               <li>
-                <a href="#events"><i class="far fa-calendar-alt fa-fw"></i> Place Holder</a>
+                <a href="#events"><i class="far fa-calendar-alt fa-fw"></i> Events</a>
               </li>
-              <!-- <li>
+              <li>
                 <a href="#stats"><i class="far fa-chart-bar fa-fw"></i> Stats</a>
               </li>
               <li>
                 <a href="#discount"><i class="fas fa-percent fa-fw"></i> Request A Discount</a>
-              </li> -->
+              </li>
             </ul>
           </div>
           <!-- End Megamenu -->
@@ -166,6 +169,28 @@
   <!-- End Footer -->
 
   {%block script%}
+  <script>
+    let notifyButton = document.querySelector(".notify-button");
+    let notifyArea = document.querySelector(".notify-area");
+
+    const ShowDropdown = () => {
+      notifyButton.classList.add("active");
+      notifyArea.style.visibility = "visible";
+    }
+
+    const HideDropdown = () => {
+      notifyButton.classList.remove("active");
+      notifyArea.style.visibility = "hidden";
+    }
+
+    function ToggleNotifyDropdown(event) {
+      var isInside = notifyButton.contains(event.target) || notifyArea.contains(event.target);
+
+      return isInside ? ShowDropdown() : HideDropdown();
+    }
+
+    document.addEventListener("click", ToggleNotifyDropdown);
+  </script>
   <script src=" {%static 'js/main.js'%}"></script>
   {%endblock%}
 </body>

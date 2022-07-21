@@ -1,6 +1,5 @@
 :root {
-  --cardWidth: 240px;
-  --cardHeight: 292px;
+
   --cardMargin: 16px;
   --main-transition: 0.3s;
   --main-color: #2196f3;
@@ -77,13 +76,13 @@ body {
   transition-delay: 0.5s;
 }
 
-.header {
+.headers {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.header h1.entry-title {
+.headers h1.entry-title {
   padding: 5px 10px;
   font-weight: 700;
   margin-bottom: 20px;
@@ -109,8 +108,6 @@ body {
   flex-direction: column;
 
 }
-
-
 
 .card {
   display: block;
@@ -157,8 +154,8 @@ h1 {
 }
 
 .card {
-  width: var(--cardWidth);
-  height: var(--cardHeight);
+  width: fit-content;
+  height: fit-content;
   margin: var(--cardMargin);
   border: 1px solid #5F656C;
   border-radius: 15px;
@@ -246,6 +243,8 @@ img {
 
 
 
+
+.pad {}
 
 .card-bordered {
   border: 1px solid #ebebeb;
@@ -454,7 +453,6 @@ h4.card-title {
 
 .media-chat.media-chat-reverse {
   padding-right: 12px;
-  padding-left: 64px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   flex-direction: row-reverse;

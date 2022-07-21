@@ -1,18 +1,13 @@
 {%extends 'base.html'%}
-{%load static%}
 {%block content%}
-
-
-<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
-<link rel="stylesheet" href="{% static 'all.min.css' %}" />
+{%load static%}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
 <link rel="stylesheet" href="{% static 'css/Emergency.css' %}" />
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<style>
-    .card1{
-        /* background-color:black; */
-    }
-</style>
+<div class="headers">
+    <h2 class="main-title">Emergency Animal</h2>
+</div>
 
 <!--Row with two equal columns-->
 
@@ -22,7 +17,7 @@
         <h2 class="main-title">Location</h2>
         <div class="wrapper">
             {% for location in Locations %}
-            <div class="card card1">
+            <div class="card p-2" style="height: fit-content; width: fit-content;">
                 <img src="{{location.picture.url}}" alt="">
                 <div class="content">
                     <h4>{{location.name}}</h4>
@@ -40,7 +35,8 @@
         <h2 class="main-title">Doctors</h2>
         <div class="demo-content bg-alt">
             <div class=" text-center m-auto col-md-4 col-sm-7 col-xs-12">
-                <div class="testimonials" id="testimonials">
+                <div class="testimonials bg-transparent" id="testimonials">
+
                     <div class="container container1">
                         {% for vet in vets %}
                         <div class="box">
@@ -90,7 +86,7 @@
                                 <div class="media-body" id="MessageDiv">
                                 </div>
                             </div>
-                            <div class="media media-chat media-chat-reverse">
+                            <div class="media media-chat media-chat-reverse ps-0">
                                 <div class="media-body" id="MessageDivReverse">
                                 </div>
                             </div>
@@ -149,12 +145,9 @@
 
 
 
-var scrollNeeded = true;
+    var scrollNeeded = true;
 
     function ViewMessage(vet_username) {
-
-
-
         $.ajax({
             url: "/getVetFirstName/" + vet_username,
             success: function (data) {
@@ -162,33 +155,25 @@ var scrollNeeded = true;
                 document.getElementById("receiver-name").innerHTML = data.vet.firstname;
             }
         })
-
-
-
-
-
-
-
-
         chatInterval = setInterval(function () {
             // GET MESSAGES
             $.ajax({
                 url: "/viewMessages/",
                 success: function (data) {
+                    console.log("Data Of View Messages : ")
+                    console.log(data.Messages, typeof (data.Messages))
                     // UPDATE CHATBOX
                     $('#MessageDivReverse').html('');
+                    $('#MessageDiv').html('');
                     for (const key in data.Messages) {
-                        // console.log(`${key}: ${data.Messages[key].content}`);
-                        // Message Element
+                        console.log(`${key}: ${data.Messages[key].content}`);
                         const para = document.createElement("p");
                         para.innerHTML = data.Messages[key].content;
-                        // Time Element
                         const time = document.createElement("p");
                         month = data.Messages[key].date.split("-")[1]
                         day = data.Messages[key].date.split("-")[2]
                         day = day.split("T")[0]
                         time.innerHTML = month + "/" + day;
-                        // Sender Element
                         const sender = document.createElement("p");
                         sender.innerHTML = data.Messages[key].sender;
                         time.classList.add("meta");
@@ -200,10 +185,10 @@ var scrollNeeded = true;
                             para.style.backgroundColor = 'rgb(127, 127, 127)';
                         }
                     }
-                    if(scrollNeeded){
-                            let scroll_to_bottom = document.getElementById('chat-content');
-                            scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
-                            scrollNeeded=false
+                    if (scrollNeeded) {
+                        let scroll_to_bottom = document.getElementById('chat-content');
+                        scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
+                        scrollNeeded = false
                     }
                 }
             })
@@ -217,24 +202,12 @@ var scrollNeeded = true;
         clearInterval(chatInterval);
     }
 
-
-
-
     function sendMessage() {
-        var inputArr=[]
-        let i =0
-        for(char of document.getElementById("Message").value){
-            if(char == "?"){
-                char = '؟'
-                inputArr[i]=char
-            }else{
-                inputArr[i]=char
-            }
-            i = i +1
+        if (document.getElementById("Message").value == '?') {
+            document.getElementById("Message").value = '؟'
         }
-        var messageOfArr = inputArr.join("");
         $.ajax({
-            url: "/sendMessage/message=" + messageOfArr,
+            url: "/sendMessage/message=" + String(document.getElementById("Message").value),
             success: function (data) {
                 scrollNeeded = true;
                 document.getElementById("Message").value = "";
@@ -247,4 +220,5 @@ var scrollNeeded = true;
 <script src="{% static 'js/all.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+
 {%endblock%}
