@@ -35,6 +35,7 @@ def addAnimal(request):
         if(Animal.objects.filter(animalName=request.POST['animalName']+"_"+request.session['username']).exists()):
             context['errAnimalExists'] = 'An Animal Of Yours Is Already Registered With This Name , Please Try A Different Name'
             return render(request, 'addAnimal.html', context)
+
         # If Female Add female_state
         if(request.POST['gender'] == "f"):
             animal = Animal.objects.create(animalName=request.POST['animalName']+"_"+request.session['username'],
@@ -46,6 +47,7 @@ def addAnimal(request):
                                            b_date=request.POST['b_date'])
             context['success'] = "Your Animal Is Now Registered"
             return render(request, 'addAnimal.html', context)
+
         # If Male Do Not Add female_state
         animal = Animal.objects.create(animalName=request.POST['animalName']+"_"+request.session['username'],
                                        ownerUsername=request.session['username'],
