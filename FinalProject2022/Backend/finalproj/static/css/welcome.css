@@ -1,0 +1,67 @@
+
+/* style loginUser page start*/
+body{
+    background-color: #ececec;
+}
+.contain{
+    border-radius: 10px;
+    margin-left: 20%;
+    
+}
+.card:hover{
+    transform: scale(1.2);
+    width:200px;
+}
+.card{
+    margin-left: 25%;
+    margin-top: 4%;
+    border-radius: 10px;
+    transition: width 2s, height 2s, transform 2s;
+    
+}
+.btn{
+    margin-left: 20%;
+    text-shadow: 2px 2px black;
+}
+.card-img-top{
+    opacity: 0.5;
+}
+.card-img-top:hover{
+    opacity: 1;
+}
+.hh{
+    background-color: black;
+}
+/* style loginUser page end */
+
+/* style welcome page starts*/
+.head{
+    margin-top: 15%;
+    margin-left: 28%;
+}
+#web{
+    font-size: 45px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color:black;
+    text-shadow: 2px 2px white;
+    
+}
+.span1{
+    color: #1787e0;
+}
+.head .para{
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 5%;
+    margin-left: 10%;
+    color:black;
+    text-shadow: 2px 2px whitesmoke;
+
+}
+.head .btn{
+    background-color: #1787e0;
+    margin-top: 3%;
+    margin-left: 25%;
+    font-size: 20px;
+}
+/* style welcome page end*/

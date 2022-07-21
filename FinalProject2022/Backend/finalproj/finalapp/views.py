@@ -397,7 +397,7 @@ def registerUser(request):
             recepient = request.POST['email']
             sendEmail(request, recepient)
 
-            return HttpResponse('inserted')
+            return render(request,'welcome.html')
 
 
 def registervet(request):
@@ -460,24 +460,36 @@ def registervet(request):
             recepient = request.POST['email']
             sendEmailVet(request, recepient)
 
-            return HttpResponse('inserted')
+            return render(request, 'welcome.html')
 
+def logingeneral(request):
+    return render(request,'loginUsers.html')
+
+def testwel(request):
+    return render(request,'welcome.html')
 
 def login(request):
     if(request.method == 'GET'):
         return render(request, 'login.html')
-    myuser = Myuser.objects.filter(
-        username=request.POST['username'], password=request.POST['password'])
+    else:
 
-    if(len(myuser) != 0):
-        myuser1 = Myuser.objects.get(username=request.POST['username'])
-        if(myuser1.active_status == False):
-            return render(request, 'notVerified.html')
+        myuser = Myuser.objects.filter(
+            username=request.POST['username'], password=request.POST['password'])
+
+        if(len(myuser) != 0):
+            myuser1 = Myuser.objects.get(username=request.POST['username'])
+            if(myuser1.active_status == False):
+                return render(request, 'notVerified.html')
+            else:
+                request.session['username'] = request.POST['username']
+                request.session['firstname'] = myuser1.firstname
+                request.session['pic_url'] = myuser1.profile_pic.url
+                return render(request, 'home.html')
         else:
-            request.session['username'] = request.POST['username']
-            request.session['firstname'] = myuser1.firstname
-            request.session['pic_url'] = myuser1.profile_pic.url
-            return render(request, 'home.html')
+            context = {}
+            context['notfound'] = 'this username and password are not correct'
+            return render(request, 'login.html', context)
+
 
 
 def loginVet(request):

@@ -35,6 +35,9 @@ urlpatterns = [
     path('verifyVet/<str:username>/<dates>/', verifyVet),
     path('test/', test),
     path('login/', login),
+    path('loginVet/', loginVet),
+    path('logingeneral/',logingeneral),
+    path('testwel/',testwel),
 
     path('verify/<str:username>/<dates>/', verifyUser),
     path('verifyVet/<str:username>/<dates>/', verifyVet),
