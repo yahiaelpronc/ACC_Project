@@ -128,15 +128,9 @@ function checkDate(e){
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-    today = mm + '/' + dd + '/' + yyyy;
-    console.log(today);
-    console.log(parseInt(yyyy)-parseInt(e.value.split("-")[0]))
-    console.log(parseInt(mm)-parseInt(e.value.split("-")[1]))
-    console.log(parseInt(dd)-parseInt(e.value.split("-")[2]))
-    if(parseInt(dd)-parseInt(e.value.split("-")[2]) < 0
-    || parseInt(mm)-parseInt(e.value.split("-")[1]) < 0
-    || parseInt(yyyy)-parseInt(e.value.split("-")[0]) < 0
-    ){
+    today = yyyy + "-"+ mm + '-' + dd;
+    if(e.value > today)
+    {
         e.style.color = "red"
         dateErr.style.display = "block"
         dateErr.style.color = "red"
