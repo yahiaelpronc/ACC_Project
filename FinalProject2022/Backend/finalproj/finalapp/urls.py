@@ -21,6 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+
     path('addAnimal/', addAnimal),
     path('logout/', logout),
     path('viewMessages/', viewMessages),
@@ -38,6 +39,7 @@ urlpatterns = [
     path('loginVet/', loginVet),
     path('logingeneral/',logingeneral),
     path('testwel/',testwel),
+    path('listusers/',listUsers),
 
     path('verify/<str:username>/<dates>/', verifyUser),
     path('verifyVet/<str:username>/<dates>/', verifyVet),
